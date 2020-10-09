@@ -1,13 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter as Router} from 'react-router-dom';
+import RouterApp from './RouterApp';
+
 
 function App() {
   return (
-    <div className="App">
-      {/* develop branch */}
-      {/* octavia's branch */}
-    </div>
+    <Router>
+      <RouterApp/>
+    </Router>
   );
 }
 
