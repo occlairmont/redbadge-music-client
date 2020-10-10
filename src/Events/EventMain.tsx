@@ -39,8 +39,8 @@ class EventMain extends React.Component<EventMainProps, EventMainState> {
     render() { 
         return ( 
         <div>
-           {this.state.eventData?.map((userEvent:UserEvents, index: number)=><EventDisplay userEvent={userEvent} key=
-           {index}/>)}
+           {/* {this.state.eventData?.map((userEvent:UserEvents, index: number)=><EventDisplay userEvent={userEvent} key=
+           {index}/>)} */} {this.state.eventData != undefined ? <EventDisplay userEvent={this.state.eventData} key={2}/> : <></>}
         </div> 
         );
     }
