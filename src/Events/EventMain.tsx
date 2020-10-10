@@ -1,3 +1,4 @@
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import EventDisplay from './EventDisplay';
 import {EventResponse, UserEvents} from './EventInterface';
@@ -38,7 +39,8 @@ class EventMain extends React.Component<EventMainProps, EventMainState> {
     render() { 
         return ( 
         <div>
-           {this.state.eventData?.map((userEvent:UserEvents)=><EventDisplay userEvent={userEvent}/>)}
+           {this.state.eventData?.map((userEvent:UserEvents, index: number)=><EventDisplay userEvent={userEvent} key=
+           {index}/>)}
         </div> 
         );
     }
