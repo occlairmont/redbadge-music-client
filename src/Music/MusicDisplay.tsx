@@ -42,7 +42,7 @@ const useStyles = makeStyles({
   return (
       <div>
           <Grid container>
-          {props.message.map((trackList: Track, index: number) => (
+          {props.message.message.body.track_list.map((trackList: Track, index: number) => (
           <Grid item xs={6} sm={6} className={classes.cardspacing} key={index}>
             <Card className={classes.root}>
               <CardContent>
@@ -70,7 +70,10 @@ const useStyles = makeStyles({
               </CardActions>
             </Card>
           </Grid>
-        ))}
+        )):(
+            <></>
+        )
+        }
 
     </Grid>
     </div>
