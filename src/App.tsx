@@ -1,12 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import RouterApp from './RouterApp';
 
 function App() {
   return (
     <div className="App">
       {/* develop branch */}
       {/* octavia's branch */}
+      <RouterApp />
     </div>
   );
 }
