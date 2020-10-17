@@ -160,4 +160,3 @@ export interface ResponseLogin {
   message: string;
   sessionToken: string;
 }
-

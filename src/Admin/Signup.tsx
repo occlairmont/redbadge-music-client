@@ -74,3 +74,4 @@ export interface ResponseSignup {
   message: string;
   sessionToken: string;
 }
+
