@@ -1,14 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
+// import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { Track, TrackResponse } from './MusicInterface';
-// import { withStyles } from '@material-ui/styles';
+import { TrackList, TrackResponse } from './MusicInterface';
 import {Grid} from '@material-ui/core';
-// import {cardspacing} from '@material-ui/core';
 
 export interface MusicDisplayProps {
     message : TrackResponse
@@ -37,44 +35,33 @@ const useStyles = makeStyles({
 
  function MusicDisplay(props: MusicDisplayProps) {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
+//   const bull = <span className={classes.bullet}>•</span>;
 
   return (
       <div>
           <Grid container>
-          {props.message.message.body.track_list.map((trackList: Track, index: number) => (
+          {props.message.message.body.track_list.map((trackList: TrackList, index: number) => (
           <Grid item xs={6} sm={6} className={classes.cardspacing} key={index}>
             <Card className={classes.root}>
               <CardContent>
                 <Typography
-                  className={classes.title}
-                  color="textSecondary"
-                  gutterBottom
+                 variant="h5" component="h2"
                 >
-                  {trackList.artist_name}
+                  {trackList.track.track_name}
                 </Typography>
-                <Typography variant="h5" component="h2">
-                  be{bull}nev{bull}o{bull}lent
+                <Typography color='textSecondary'>
+                 {trackList.track.album_name}
                 </Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                  adjective
+                <Typography className={classes.pos}>
+                 {trackList.track.artist_name}
                 </Typography>
                 <Typography variant="body2" component="p">
-                  well meaning and kindly.
-                  <br />
-                  {'"a benevolent smile"'}
+                <a href ={trackList.track.track_edit_url}>Click here for Lyrics</a>
                 </Typography>
               </CardContent>
-              <CardActions>
-                <Button size="small">Learn More</Button>
-              </CardActions>
             </Card>
           </Grid>
-        )):(
-            <></>
-        )
-        }
-
+        ))}
     </Grid>
     </div>
   );
