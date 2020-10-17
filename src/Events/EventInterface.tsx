@@ -49,3 +49,4 @@ export interface EventResponse {
     artist_id?: string;
     on_sale_datetime?: string;
 }
+
