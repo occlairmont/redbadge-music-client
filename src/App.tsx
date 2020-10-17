@@ -5,11 +5,9 @@ import RouterApp from './RouterApp';
 
 function App() {
   return (
-    <div >
-      <Router>
-        <RouterApp/>
-      </Router>
-    </div>
+    <Router>
+      <RouterApp/>
+    </Router>
   );
 }
 
