@@ -5,7 +5,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { EventResponse, UserEvents } from "./EventInterface";
+import {UserEvents} from "./EventInterface";
 import { Grid } from "@material-ui/core";
 
 export interface EventDisplayProps {
@@ -58,7 +58,6 @@ const useStyles = makeStyles({
 });
 export default function EventDisplay(props: EventDisplayProps) {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
   return (
     <div>
       <Grid container>
@@ -69,12 +68,10 @@ export default function EventDisplay(props: EventDisplayProps) {
                 <Typography
                   className={classes.title}
                   color="textSecondary"
-                  gutterBottom
-                >
-                  {userEvent.artist}
+                  gutterBottom>
                 </Typography>
                 <Typography variant="h5" component="h2">
-                  be{bull}nev{bull}o{bull}lent
+                  {userEvent.artist}                  
                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
                   adjective
@@ -86,7 +83,7 @@ export default function EventDisplay(props: EventDisplayProps) {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small">Learn More</Button>
+                <Button size="small">Buy Tickets</Button>
               </CardActions>
             </Card>
           </Grid>
