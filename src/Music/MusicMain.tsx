@@ -1,5 +1,5 @@
-import {CardContent} from '@material-ui/core';
-import {Card} from '@material-ui/core';
+// import {CardContent} from '@material-ui/core';
+// import {Card} from '@material-ui/core';
 // import { CardContent } from '@material-ui/core';
 import React from 'react';
 import MusicDisplay from './MusicDisplay';
@@ -9,6 +9,7 @@ import { TrackResponse } from './MusicInterface';
 
 export interface MusicMainProps {
     URL: string;
+    token: any;
 }
  
 export interface MusicMainState {
@@ -33,7 +34,7 @@ class MusicMain extends React.Component<MusicMainProps, MusicMainState> {
     render() { 
         return ( 
             <div>
-            <Card>
+            {/* <Card>
                 <CardContent>
                     <h1>Search for Artist</h1>
                   {/* {this.state.Message?.message.body.track_list.map(
@@ -44,8 +45,8 @@ class MusicMain extends React.Component<MusicMainProps, MusicMainState> {
                           )
                       }
                   )} */}
-                </CardContent>
-            </Card>
+                {/* </CardContent>
+            </Card> */} 
             {this.state.Message!==undefined ?  < MusicDisplay message={this.state.Message}/> : <></>}
             </div>
          );
