@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function ButtonAppBar(props: any) {
+export default function Navbar(props: any) {
   const classes = useStyles();
 
 //   let clickLogout = () => {

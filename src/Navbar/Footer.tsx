@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 // import "../App.css"
 
 
-export default function Copyright() {
+export default function Footer() {
     // const classes = useStyles();
     return (
       <Typography variant="body2" color="textSecondary" align="center" style={{color: 'grey'}}>

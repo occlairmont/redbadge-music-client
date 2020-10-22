@@ -1,5 +1,4 @@
-
- import React, {Component} from "react";
+import React, {Component} from "react";
 
 export interface HomeProps {
     // setToken: any;
@@ -21,6 +20,7 @@ class Home extends Component<HomeProps,HomeState> {
         return (
 <div>
     <h1>You have successfully logged in!</h1>
+    
 </div>
         )
     }

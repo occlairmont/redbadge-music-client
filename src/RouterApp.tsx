@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
-import EventsMain from "./Events/EventMain";
-import MusicMain from "./Music/MusicMain";
 import Navbar from './Navbar/Navbar';
 import { Route, Switch } from 'react-router-dom';
 import Login from "./Auth/Login";
 import Footer from "./Navbar/Footer";
 import Signup from "./Auth/Signup";
 import Home from "./Auth/Home";
+import EventMain from './Events/EventMain';
 // import MusicDisplay from "./Music/MusicDisplay";
-// import EventDisplay from "./Events/EventDisplay";
-import "./App.css";
-
 
 interface Props {
   
@@ -27,10 +22,11 @@ export const RouterApp = (props: Props) => {
   }, []);
   console.log(token);
 
-  const updateToken = (token: string) => {
-    localStorage.setItem("token", token);
-    setToken(token);
-  };
+  // const updateToken = (token: string) => {
+  //   localStorage.setItem("token", token);
+  //   setToken(token);
+  //   console.log(token);
+  // };
 
   const clearToken = () => {
     // localStorage.removeItem("token");
@@ -39,8 +35,7 @@ export const RouterApp = (props: Props) => {
   };
 
       const protectedViews = () => {
-        console.log(token);
-      return (!token ? <Login setToken={updateToken}  />  : <Home token={token }/>) 
+      return (!token ? <Login setToken={setToken}  />  : <Home token={token}/>) 
     }
   
     const userNavbar = () =>{
@@ -52,15 +47,13 @@ export const RouterApp = (props: Props) => {
             {userNavbar()}
         <Switch>
             <Route exact path="/">
-            {protectedViews()}
+                {protectedViews()}
             </Route>
             <Route exact path="/music">
-                
                 {protectedViews()}
             </Route>
             <Route exact path="/events">
-
-            {protectedViews()}
+              <EventMain token={token}/>
             </Route>
             <Route exact path="/signup">
               <Signup setToken={setToken} />

@@ -5,7 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { Track, TrackResponse } from './MusicInterface';
+import { TrackList, TrackResponse } from './MusicInterface';
 // import { withStyles } from '@material-ui/styles';
 import {Grid} from '@material-ui/core';
 // import {cardspacing} from '@material-ui/core';
@@ -42,7 +42,7 @@ const useStyles = makeStyles({
   return (
       <div>
           <Grid container>
-          {props.message.message.body.track_list.map((trackList: Track, index: number) => (
+          {props.message.message.body.track_list.map((trackList: TrackList, index: number) => (
           <Grid item xs={6} sm={6} className={classes.cardspacing} key={index}>
             <Card className={classes.root}>
               <CardContent>
@@ -51,7 +51,7 @@ const useStyles = makeStyles({
                   color="textSecondary"
                   gutterBottom
                 >
-                  {trackList.artist_name}
+                  {trackList.track.artist_name}
                 </Typography>
                 <Typography variant="h5" component="h2">
                   be{bull}nev{bull}o{bull}lent
@@ -70,11 +70,7 @@ const useStyles = makeStyles({
               </CardActions>
             </Card>
           </Grid>
-        )):(
-            <></>
-        )
-        }
-
+            ))}:(<></>)
     </Grid>
     </div>
   );

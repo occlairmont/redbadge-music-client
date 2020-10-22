@@ -7,36 +7,16 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import {UserEvents} from "./EventInterface";
 import { Grid } from "@material-ui/core";
+import EventDelete from "./EventDelete";
 
 export interface EventDisplayProps {
-  //   eventsURL: string;
   userEvent: UserEvents[];
   key: number;
+  fetchEvents(): void;
+  token: string | null;
+  // updateEvent: UserEvents;
 }
-// export interface EventDisplayState {
-// }
-// class EventDisplay extends React.Component<EventDisplayProps,EventDisplayState> {
-//   constructor(props: EventDisplayProps) {
-//     super(props);
-//     this.state = {
-//     };
-//   }
-// //   componentDidMount(){
-// //       fetch("http://localhost:3001/events/delete" , {
-// //       })
-// //   }
-//   render() {
-//     return (
-//        <div>
-//           <Card>
-//               <CardContent>{this.props.userEvent.artist}</CardContent>
-//           </Card>
-//       </div>
-//     );
-//   }
-// }
-// export default EventDisplay;
-// import React from 'react';
+
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -56,8 +36,21 @@ const useStyles = makeStyles({
       padding: "1%"
   }
 });
+
 export default function EventDisplay(props: EventDisplayProps) {
   const classes = useStyles();
+
+  // const deleteEvent = (event: UserEvents) =>{
+  //   fetch(`http://localhost:3001/events/delete/${event.id}`,{
+  //   method: "DELETE",
+  //   headers: new Headers({
+  //       "Content-Type": "application/json",
+  //       "Authorization" : props.token !== null ? props.token : "",
+  //     }),
+  //   })
+  //   .then(()=> props.fetchEvents())
+  // };
+
   return (
     <div>
       <Grid container>
@@ -85,6 +78,8 @@ export default function EventDisplay(props: EventDisplayProps) {
               <CardActions>
                 <Button size="small">Buy Tickets</Button>
               </CardActions>
+              <hr/>
+                <Button ></Button>
             </Card>
           </Grid>
         ))}
