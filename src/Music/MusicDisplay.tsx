@@ -2,42 +2,23 @@ import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
-// import CardHeader from '@material-ui/core/CardHeader';
-// import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
-// import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-<<<<<<< HEAD
-import { TrackList, TrackResponse } from './MusicInterface';
-// import { withStyles } from '@material-ui/styles';
-import {Grid} from '@material-ui/core';
-// import {cardspacing} from '@material-ui/core';
-=======
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
+// import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 // import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { TrackList, TrackResponse } from './MusicInterface';
 import { Grid } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
-
-
-
-
 export interface MusicDisplayProps {
   message : TrackResponse
 }
-
->>>>>>> 67ceeff5f642a8f17e754e0efb23a95a3dac27fc
-
-export interface MusicDisplayProps {
-  message : TrackResponse
-}
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -65,58 +46,14 @@ const useStyles = makeStyles((theme: Theme) =>
   }
   }),
 );
-
-function MusicDisplay(props: MusicDisplayProps) {
-  const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
-
 function MusicDisplay(props: MusicDisplayProps) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
   return (
-<<<<<<< HEAD
-      <div>
-          <Grid container>
-          {props.message.message.body.track_list.map((trackList: TrackList, index: number) => (
-          <Grid item xs={6} sm={6} className={classes.cardspacing} key={index}>
-            <Card className={classes.root}>
-              <CardContent>
-                <Typography
-                  className={classes.title}
-                  color="textSecondary"
-                  gutterBottom
-                >
-                  {trackList.track.artist_name}
-                </Typography>
-                <Typography variant="h5" component="h2">
-                  be{bull}nev{bull}o{bull}lent
-                </Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                  adjective
-                </Typography>
-                <Typography variant="body2" component="p">
-                  well meaning and kindly.
-                  <br />
-                  {'"a benevolent smile"'}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">Learn More</Button>
-              </CardActions>
-            </Card>
-          </Grid>
-            ))}:(<></>)
-=======
-    <div style={{backgroundColor: 'ThreeDDarkShadow'}}>
+    <div>
       <Grid container>
           {props.message.message.body.track_list.map((trackList: TrackList, index: number) => (
           <Grid item xs={4} sm={4} className={classes.cardspacing} key={index}>
@@ -136,11 +73,8 @@ function MusicDisplay(props: MusicDisplayProps) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton aria-label="add to favorites" style={{color: 'red'}}>
           <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
@@ -156,18 +90,19 @@ function MusicDisplay(props: MusicDisplayProps) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography>Ratings/Review:</Typography>
-
-         <Rating name="size-large" defaultValue={2} size="large" />
-
+          <form className={classes.root} >
+          <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
+          </form>
+          <form className={classes.root} noValidate autoComplete="off">
+          <TextField id="outlined-basic" label="Write a Review" variant="outlined" />
+          </form>
         </CardContent>
       </Collapse>
     </Card>
->>>>>>> 67ceeff5f642a8f17e754e0efb23a95a3dac27fc
     </Grid>
           ))}
           </Grid>
     </div>
   );
 }
-
 export default MusicDisplay;
