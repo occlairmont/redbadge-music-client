@@ -1,10 +1,10 @@
 import React from "react";
 import { Button, FormGroup, Input } from "@material-ui/core/";
-import { UserEvents } from "./EventInterface";
+// import { UserEvents } from "./EventInterface";
 
 export interface EventCreateProps {
   token: string | null;
-  userEvent: UserEvents[];
+  fetchEvents(): void;
 }
 
 export interface EventCreateState {
@@ -28,56 +28,81 @@ class EventCreate extends React.Component<EventCreateProps, EventCreateState> {
   }
 
   onSubmit() {
+    const token = !this.props.token ? localStorage.getItem("token") : this.props.token
     fetch("http://localhost:3001/events/create", {
       method: "POST",
       body: JSON.stringify({
-        date: "",
-        artist: "",
-        location: "",
-        time: "",
-        link: "",
+        date: this.state.date,
+        artist: this.state.artist,
+        location: this.state.location,
+        time: this.state.time,
+        link: this.state.link,
       }),
       headers: new Headers({
         "Content-Type": "application/json",
-        Authorization: this.props.token !== null ? this.props.token : "",
+        "Authorization": token !== null ? token : "",
       }),
     })
       .then((res) => res.json())
       .then((postData) => {
         console.log(postData);
         this.setState({
-          date: "",
-          artist: "",
-          location: "",
-          time: "",
-          link: "",
+          date: this.state.date,
+          artist: this.state.artist,
+          location: this.state.location,
+          time: this.state.time,
+          link: this.state.link,
         });
+        this.props.fetchEvents();
       });
-  }
-
-  handleSubmit(){
-    this.onSubmit();
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h4>
-          test create form
-        </h4>
+      <form>
+        <h3>
+          Log the next concert.
+        </h3>
         <FormGroup>
           <Input
+            type="text"
             onChange={(e) => this.setState({date: e.target.value})}
-            placeholder="Date"
+            placeholder="MM/DD/YYYY"
+            value={this.state.date}
           />
         </FormGroup>
         <FormGroup>
           <Input
+            type="text"
+            onChange={(e) => this.setState({time: e.target.value})}
+            placeholder="Time"
+            value={this.state.time}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Input
+            type="text"
             onChange={(e) => this.setState({artist: e.target.value})}
             placeholder="Artist"
+            value={this.state.artist}
           />
         </FormGroup>
-        <Button type="submit" variant="outlined">
+        <FormGroup>
+          <Input
+            type="text"
+            onChange={(e) => this.setState({location: e.target.value})}
+            placeholder="Location"
+            value={this.state.location}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Input
+            onChange={(e) => this.setState({link: e.target.value})}
+            placeholder="Link for Tickets"
+            value={this.state.link}
+          />
+        </FormGroup>
+        <Button onClick={() => this.onSubmit()} variant="outlined">
           Save
         </Button>
       </form>

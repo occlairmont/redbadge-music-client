@@ -1,4 +1,3 @@
-
     export interface Header {
         status_code: number;
         execute_time: number;

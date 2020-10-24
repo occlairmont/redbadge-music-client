@@ -1,5 +1,4 @@
 import React from "react";
-// import { useHistory } from "react-router-dom";
 // import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -63,7 +62,8 @@ class Login extends React.Component<LoginProps, LoginState> {
       .then((res: any) => res.json())
       .then((json: ResponseLogin) => {
         this.props.setToken(json.sessionToken);
-        console.log();
+        console.log(json);
+        localStorage.setItem("token", json.sessionToken)
       });
   }
 

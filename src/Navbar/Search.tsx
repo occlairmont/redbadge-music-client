@@ -5,28 +5,21 @@ import TextField from '@material-ui/core/TextField';
 // import FormControlLabel from '@material-ui/core/FormControlLabel';
 // import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-
 export interface SearchProps {
     // setToken: any;
   }
-
 export interface SearchState {
     search: string;
   }
-
   class Search extends React.Component<SearchProps, SearchState> {
   
     constructor(props: SearchProps) {
       super(props);
       this.state = { search: '' };
     }
-
-
     onSearch(e:any) {
         e.preventDefault();
-
 }
-
 render() {
     return (
      
@@ -73,5 +66,4 @@ render() {
 </>
 )}
 }
-
 export default Search;

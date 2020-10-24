@@ -6,7 +6,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Search from './Search';
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -21,10 +20,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
-
 export default function ButtonAppBar(props: any) {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       <AppBar position="static" color="secondary">
@@ -44,8 +41,4 @@ export default function ButtonAppBar(props: any) {
       </AppBar>
     </div>
   );
-
 }
-
-}
-
