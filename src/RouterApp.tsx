@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import Navbar from './Navbar/Navbar';
+// import Navbar from './Navbar/Navbar';
+import NavBar from './Navbar/NavBar';
 import { Route, Switch } from 'react-router-dom';
 import Login from "./Auth/Login";
 import Footer from "./Navbar/Footer";
@@ -50,7 +51,7 @@ export const RouterApp = (props: Props) => {
     }
 
     const userNavbar = (showSearch: any) =>{
-      return (<Navbar token={token}  clickLogout={clearToken} showSearch={showSearch}/>) 
+      return (<NavBar token={token}  clickLogout={clearToken} showSearch={showSearch}/>) 
     }
   
     return ( 
