@@ -1,6 +1,4 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-// import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -9,11 +7,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-// import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-// import Footer from "../Navbar/Footer";
 
 export interface LoginProps {
   setToken: any;
@@ -35,6 +30,18 @@ class Login extends React.Component<LoginProps, LoginState> {
 
   onSubmit(e:any) {
     e.preventDefault();
+
+    if (this.state.password.length < 5){
+      alert("Password must be at least 5 characters!")
+      return 
+    }
+
+    if (!this.state.email.includes('@')){
+      alert("You must enter a valid email address!")
+      return 
+    }
+    
+
     const endpointURL = `http://localhost:3001/users/login`;
     const body: RequestBodyLogin = {
       users: {
@@ -54,8 +61,7 @@ class Login extends React.Component<LoginProps, LoginState> {
       .then((res: any) => res.json())
       .then((json: ResponseLogin) => {
         this.props.setToken(json.sessionToken);
-        console.log(json.sessionToken);
-        
+        console.log();
       });
   }
 
