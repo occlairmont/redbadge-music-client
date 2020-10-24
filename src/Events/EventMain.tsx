@@ -3,6 +3,7 @@ import EventCreate from "./EventCreate";
 import EventDisplay from "./EventDisplay";
 import { Grid, Paper } from "@material-ui/core";
 import { UserEvents } from "./EventInterface";
+import EventEdit from "./EventEdit";
 
 export interface EventMainProps {
   // eventsURL: string;
@@ -71,6 +72,7 @@ class EventMain extends React.Component<EventMainProps, EventMainState> {
             </Grid>
             <Grid xs={12} sm={7}>
                 {this.state.eventData !== undefined ? (<EventDisplay token={this.props.token} fetchEvents={this.fetchEvents} userEvent={this.state.eventData} key={2} />) : (<></>)}  
+                {/* {this.state.updateActive ? <EventEdit token={this.props.token} updateEvent={this.updateEvent} fetchEvent={this.fetchEvents} updateOff={this.updateOff} /> : <></>} */} 
             </Grid>
           </Grid>
         </Grid>

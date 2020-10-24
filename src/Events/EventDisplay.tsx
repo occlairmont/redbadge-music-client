@@ -7,14 +7,14 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import {UserEvents} from "./EventInterface";
 import { Grid } from "@material-ui/core";
-import EventDelete from "./EventDelete";
 
 export interface EventDisplayProps {
   userEvent: UserEvents[];
   key: number;
   fetchEvents(): void;
   token: string | null;
-  // updateEvent: UserEvents;
+  // updateEvent: void;
+  // updateOn(): void;
 }
 
 const useStyles = makeStyles({
@@ -40,16 +40,16 @@ const useStyles = makeStyles({
 export default function EventDisplay(props: EventDisplayProps) {
   const classes = useStyles();
 
-  // const deleteEvent = (event: UserEvents) =>{
-  //   fetch(`http://localhost:3001/events/delete/${event.id}`,{
-  //   method: "DELETE",
-  //   headers: new Headers({
-  //       "Content-Type": "application/json",
-  //       "Authorization" : props.token !== null ? props.token : "",
-  //     }),
-  //   })
-  //   .then(()=> props.fetchEvents())
-  // };
+  const deleteEvent = (event: UserEvents) =>{
+    fetch(`http://localhost:3001/events/delete/${event.id}`,{
+    method: "DELETE",
+    headers: new Headers({
+        "Content-Type": "application/json",
+        "Authorization" : props.token !== null ? props.token : "",
+      }),
+    })
+    .then(()=> props.fetchEvents())
+  };
 
   return (
     <div>
@@ -79,7 +79,7 @@ export default function EventDisplay(props: EventDisplayProps) {
                 <Button size="small">Buy Tickets</Button>
               </CardActions>
               <hr/>
-                <Button ></Button>
+                <Button onClick={()=>{deleteEvent(userEvent)}}>Delete</Button>
             </Card>
           </Grid>
         ))}
