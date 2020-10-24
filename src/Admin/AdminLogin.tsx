@@ -1,51 +1,46 @@
 import React from "react";
-// import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
-export interface LoginProps {
+export interface AdminProps {
   setToken: any;
-  // updateToken: (token: string) => void;
+//   updateToken: (token: string) => void;
 }
 
-export interface LoginState {
+export interface AdminState {
   email: string;
   password: string;
 }
 
-
-class Login extends React.Component<LoginProps, LoginState> {
-  
-  constructor(props: LoginProps) {
+class AdminLogin extends React.Component<AdminProps, AdminState> {
+  constructor(props: AdminProps) {
     super(props);
     this.state = { email: "", password: "" };
   }
 
-  onSubmit(e:any) {
+  onSubmit(e: any) {
     e.preventDefault();
 
     if (this.state.password.length < 5){
-      alert("Password must be at least 5 characters!")
-      return 
-    }
+        alert("Password must be at least 5 characters!")
+        return 
+      }
+  
+      if (!this.state.email.includes('@')){
+        alert("You must enter a valid email address!")
+        return 
+      }
 
-    if (!this.state.email.includes('@')){
-      alert("You must enter a valid email address!")
-      return 
-    }
-    
-
-    const endpointURL = `http://localhost:3001/users/login`;
+    const endpointURL = `http://localhost:3001/admin/login`;
     const body: RequestBodyLogin = {
-      users: {
+      admin: {
         email: this.state.email,
         password: this.state.password,
       },
@@ -63,12 +58,9 @@ class Login extends React.Component<LoginProps, LoginState> {
       .then((json: ResponseLogin) => {
         this.props.setToken(json.sessionToken);
         console.log(json);
-        localStorage.setItem("token", json.sessionToken)
       });
   }
 
-
-  
   render() {
     return (
       <>
@@ -79,7 +71,7 @@ class Login extends React.Component<LoginProps, LoginState> {
     flexDirection: 'column',
     alignItems: 'center',}}>
         <Typography component="h1" variant="h5">
-          Sign In
+          Admins Only
         </Typography>
         <form style={{width: '100%', // Fix IE 11 issue.
     marginTop: '1em',}}>
@@ -126,7 +118,7 @@ class Login extends React.Component<LoginProps, LoginState> {
             Sign In
           </Button>
           <Grid container>
-            <Grid item xs>
+            {/* <Grid item xs>
               <Link href="#" variant="body2">
                 Forgot password?
               </Link>
@@ -135,7 +127,7 @@ class Login extends React.Component<LoginProps, LoginState> {
               <Link href="/signup" variant="body2">
                 {"Don't have an account? Create one."}
               </Link>
-            </Grid>
+            </Grid> */}
           </Grid>
         </form>
       </div>
@@ -151,20 +143,19 @@ class Login extends React.Component<LoginProps, LoginState> {
 }
 
 
+export default AdminLogin;
 
-export default Login;
-
-export interface Users {
+export interface Admin {
   email: string;
   password: string;
 }
 
 export interface RequestBodyLogin {
-  users: Users;
+  admin: Admin;
 }
 
 export interface ResponseLogin {
-  users: Users;
+  admin: Admin;
   message: string;
   sessionToken: string;
 }

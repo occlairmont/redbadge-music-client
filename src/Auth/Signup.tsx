@@ -1,4 +1,8 @@
 import React from "react";
+<<<<<<< HEAD
+=======
+// import { useHistory } from "react-router-dom";
+>>>>>>> 67ceeff5f642a8f17e754e0efb23a95a3dac27fc
 // import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -8,7 +12,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 // import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -16,6 +19,7 @@ import Container from '@material-ui/core/Container';
 export interface SignupProps {
   setToken: any;
   // updateToken: (token: string) => void;
+  
 }
 
 export interface SignupState {
@@ -31,6 +35,17 @@ class Signup extends React.Component<SignupProps, SignupState> {
 
   onSubmit(e:any) {
     e.preventDefault()
+
+    if (!this.state.email.includes('@')){
+      alert("You must enter a valid email address!")
+      return 
+    }
+
+    if (this.state.password.length < 5){
+      alert("Password must be at least 5 characters!")
+      return 
+    }
+
     const endpointURL = `http://localhost:3001/users/register`;
     const body: RequestBodySignup = {
       users: {
@@ -76,9 +91,9 @@ class Signup extends React.Component<SignupProps, SignupState> {
           id="email"
           label="Email Address"
           name="email"
-          autoComplete="off"
           autoFocus
           type="email"
+          required
           onChange={(e) => this.setState({ email: e.target.value })}
         />
 
