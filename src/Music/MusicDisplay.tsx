@@ -17,9 +17,20 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 // import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { TrackList, TrackResponse } from './MusicInterface';
 import { Grid } from '@material-ui/core';
+import Rating from '@material-ui/lab/Rating';
+
+
+
+
 export interface MusicDisplayProps {
   message : TrackResponse
 }
+
+
+export interface MusicDisplayProps {
+  message : TrackResponse
+}
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -47,12 +58,23 @@ const useStyles = makeStyles((theme: Theme) =>
   }
   }),
 );
+
+function MusicDisplay(props: MusicDisplayProps) {
+  const classes = useStyles();
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+
+
 function MusicDisplay(props: MusicDisplayProps) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
   return (
     <div style={{backgroundColor: 'ThreeDDarkShadow'}}>
       <Grid container>
@@ -94,6 +116,9 @@ function MusicDisplay(props: MusicDisplayProps) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography>Ratings/Review:</Typography>
+
+         <Rating name="size-large" defaultValue={2} size="large" />
+
         </CardContent>
       </Collapse>
     </Card>
@@ -103,4 +128,5 @@ function MusicDisplay(props: MusicDisplayProps) {
     </div>
   );
 }
+
 export default MusicDisplay;

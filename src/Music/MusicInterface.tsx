@@ -22,6 +22,7 @@
     }
 
     export interface Track {
+        track_list: any;
         track_id: number;
         track_name: string;
         track_name_translation_list: any[];
@@ -61,3 +62,12 @@
         message: Message;
     }
 
+
+    // import { TrackList } from './MusicInterface';
+
+
+
+// export interface MusicDisplayProps {
+//     message : TrackList
+  
+// }
