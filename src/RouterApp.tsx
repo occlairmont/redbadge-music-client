@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 // import EventsMain from "./Events/EventMain";
 import MusicMain from "./Music/MusicMain";
-import Navbar from './NavBar/Navbar';
+// import Navbar from './NavBar/Navbar';
+// import Navbar from './Navbar/Navbar';
+import NavBar from './Navbar/NavBar';
 import { Route, Switch } from 'react-router-dom';
 import Login from "./Auth/Login";
 import Footer from './NavBar/Footer';
@@ -11,6 +13,11 @@ import Signup from "./Auth/Signup";
 // import MusicDisplay from "./Music/MusicDisplay";
 // import EventDisplay from "./Events/EventDisplay";
 import "./App.css";
+import AdminLogin from "./Admin/AdminLogin";
+import EventMain from "./Events/EventMain";
+import MusicMain from "./Music/MusicMain";
+// import MusicDisplay from './Music/MusicDisplay';
+import AdminHome from "./Admin/AdminHome";
 
 
 interface Props {
@@ -21,13 +28,14 @@ export const RouterApp = (props: Props) => {
   const [artist, setArtist] = useState('');
     const URL = `http://api.musixmatch.com/ws/1.1/track.search?q_artist=${artist}&page_size=50&page=1&s_track_rating=desc&apikey=b4e045669f1de0e2ba866086653af11f`
   const [token, setToken] = useState<string | null>('');
+  const [artist, setArtist] = useState('');
+    const URL = `http://api.musixmatch.com/ws/1.1/track.search?q_artist=${artist}&page_size=50&page=1&s_track_rating=desc&apikey=b4e045669f1de0e2ba866086653af11f`
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setToken(localStorage.getItem("token"));
     }
   }, []);
-  console.log(token);
 
   const updateToken = (token: string) => {
     localStorage.setItem("token", token);
@@ -43,34 +51,59 @@ export const RouterApp = (props: Props) => {
       const protectedViews = () => {
         console.log(token);
       return (!token ? <Login setToken={updateToken}  />  : <MusicMain URL={URL} token={token }/>) 
+
+      return (!token ? <Login setToken={updateToken} />  : <EventMain token={token} />) 
+    }
+
+    const protectedViewsMusic = () => {
+      return (!token ? <Login setToken={updateToken} />  : <MusicMain URL={URL} token={token } />) 
+
     }
   
-    const userNavbar = () =>{
-      return (<Navbar token={token}  clickLogout={clearToken}/>) 
+    const protectedViewsAdmin = () => {
+      return (!token ? <AdminLogin setToken={updateToken} />  : <AdminHome token={token} />) 
+    }
+
+    const userNavbar = (showSearch: any) =>{
+      return (<NavBar token={token}  clickLogout={clearToken} showSearch={showSearch}/>) 
     }
   
     return ( 
         <div>
-            {userNavbar()}
+            
         <Switch>
             <Route exact path="/">
+            {userNavbar(false)}
             {protectedViews()}
             </Route>
-            <Route exact path="/music">
-                {protectedViews()}
-            </Route>
-            <Route exact path="/events">
 
+            <Route exact path="/music">
+
+                {protectedViews()}
+
+            {userNavbar(true)}
+                {protectedViewsMusic()}
+
+            </Route>
+
+            <Route exact path="/events">
+            {userNavbar(false)}
             {protectedViews()}
             </Route>
+
             <Route exact path="/signup">
+            {userNavbar(false)}
               <Signup setToken={setToken} />
             </Route>
+
             <Route exact path="/login">
+            {userNavbar(false)}
               <Login setToken={setToken} />
             </Route>
-            <Route exact path="/admin">
 
+            <Route exact path="/admin">
+            {userNavbar(false)}
+            {protectedViewsAdmin()}
               </Route>
         </Switch>
         <Footer/>

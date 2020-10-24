@@ -26,6 +26,11 @@ export interface MusicDisplayProps {
   message : TrackResponse
 }
 
+
+export interface MusicDisplayProps {
+  message : TrackResponse
+}
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -58,6 +63,14 @@ function MusicDisplay(props: MusicDisplayProps) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+
+
+function MusicDisplay(props: MusicDisplayProps) {
+  const classes = useStyles();
+  const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -103,7 +116,9 @@ function MusicDisplay(props: MusicDisplayProps) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography>Ratings/Review:</Typography>
+
          <Rating name="size-large" defaultValue={2} size="large" />
+
         </CardContent>
       </Collapse>
     </Card>
