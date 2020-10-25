@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, FormGroup, Input } from "@material-ui/core/";
-// import { UserEvents } from "./EventInterface";
 
 export interface EventCreateProps {
   token: string | null;
@@ -57,6 +56,11 @@ class EventCreate extends React.Component<EventCreateProps, EventCreateState> {
       });
   }
 
+  formatDate = (dateTime: any) => {
+    let date = new Date(dateTime)
+    return date.toLocaleString().split(",")[0]
+  }
+
   render() {
     return (
       <form>
@@ -102,6 +106,7 @@ class EventCreate extends React.Component<EventCreateProps, EventCreateState> {
             value={this.state.link}
           />
         </FormGroup>
+        
         <Button onClick={() => this.onSubmit()} variant="outlined">
           Save
         </Button>

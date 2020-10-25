@@ -6,7 +6,6 @@ import { UserEvents } from "./EventInterface";
 import EventEdit from "./EventEdit";
 
 export interface EventMainProps {
-  // eventsURL: string;
   token: string | null;
 }
 
@@ -20,7 +19,7 @@ class EventMain extends React.Component<EventMainProps, EventMainState> {
   constructor(props: EventMainProps) {
     super(props);
     this.state = {
-      eventData: [],
+      eventData: [], 
       eventUpdate: {},
       updateActive: false, 
     };

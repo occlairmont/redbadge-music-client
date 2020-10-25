@@ -51,13 +51,18 @@ export default function EventDisplay(props: EventDisplayProps) {
     .then(()=> props.fetchEvents())
   };
 
+  function formatDate(dateTime: any) {
+    let date = new Date(dateTime)
+    return date.toLocaleString().split(",")[0]
+  }
+
   return (
     <div>
       <Grid container>
         {props.userEvent.map((userEvent: UserEvents, index: number) => (
           <Grid item xs={6} sm={6} className={classes.cardspacing} key={index}>
             <Card className={classes.root}>
-              <CardContent>
+              <CardContent> 
                 <Typography
                   className={classes.title}
                   color="textSecondary"
@@ -66,13 +71,11 @@ export default function EventDisplay(props: EventDisplayProps) {
                 <Typography variant="h5" component="h2">
                   {userEvent.artist}                  
                 </Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                  adjective
-                </Typography>
                 <Typography variant="body2" component="p">
-                  well meaning and kindly.
-                  <br />
-                  {'"a benevolent smile"'}
+                  {formatDate(userEvent.date)}
+                </Typography>
+                <Typography className={classes.pos} color="textSecondary">
+                  {userEvent.time}
                 </Typography>
               </CardContent>
               <CardActions>

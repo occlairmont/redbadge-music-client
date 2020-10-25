@@ -65,6 +65,11 @@ class EventEdit extends React.Component<EventEditProps, EventEditState> {
         this.props.updateOff();
     };
 
+    formatDate = (dateTime: any) => {
+        let date = new Date(dateTime)
+        return date.toLocaleString().split(",")[0]
+    }
+
     render() { 
         return ( 
         <div>
@@ -92,7 +97,7 @@ class EventEdit extends React.Component<EventEditProps, EventEditState> {
              type="text"
              onChange={(e) => this.setState({date: e.target.value})}
              placeholder="date"
-             value={this.state.date}
+             value={this.formatDate(this.state.date)}
              fullWidth
            />
             <TextField
@@ -123,16 +128,6 @@ class EventEdit extends React.Component<EventEditProps, EventEditState> {
              onChange={(e) => this.setState({link: e.target.value})}
              placeholder="Artist"
              value={this.state.link}
-             fullWidth
-           />
-           <TextField
-             autoFocus
-             margin="dense"
-             id="name"
-             type="text"
-             onChange={(e) => this.setState({artist: e.target.value})}
-             placeholder="Artist"
-             value={this.state.artist}
              fullWidth
            />
          </DialogContent>
