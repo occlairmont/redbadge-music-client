@@ -102,7 +102,7 @@ const MusicTable: React.SFC<MusicTableProps> = (props: MusicTableProps) => {
            
           </TableRow>
         </TableHead>
-        {/* <TableBody>
+        <TableBody>
           {props.data.map((row: any , index: any) => (
             <TableRow key={index}>
               <TableCell component="th" scope="row">
@@ -114,7 +114,7 @@ const MusicTable: React.SFC<MusicTableProps> = (props: MusicTableProps) => {
 
             </TableRow>
           ))}
-        </TableBody> */}
+        </TableBody>
       </Table>
     </TableContainer>
      );
