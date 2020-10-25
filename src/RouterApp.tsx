@@ -11,15 +11,16 @@ import Signup from "./Auth/Signup";
 // import MusicDisplay from "./Music/MusicDisplay";
 // import EventDisplay from "./Events/EventDisplay";
 import "./App.css";
+import { TrackList } from './Music/MusicInterface';
 
 
 interface Props {
-  
+ trackList : TrackList
 }
 
 export const RouterApp = (props: Props) => {
   const [artist, setArtist] = useState('');
-    const URL = `http://api.musixmatch.com/ws/1.1/track.search?q_artist=${artist}&page_size=50&page=1&s_track_rating=desc&apikey=b4e045669f1de0e2ba866086653af11f`
+    const URL = `http://api.musixmatch.com/ws/1.1/track.search?q_artist=${artist}&page_size=20&page=1&s_track_rating=desc&apikey=b4e045669f1de0e2ba866086653af11f`
   const [token, setToken] = useState<string | null>('');
 
   useEffect(() => {
@@ -42,7 +43,7 @@ export const RouterApp = (props: Props) => {
 
       const protectedViews = () => {
         console.log(token);
-      return (!token ? <Login setToken={updateToken}  />  : <MusicMain URL={URL} token={token }/>) 
+      return (!token ? <Login setToken={updateToken}  />  : <MusicMain trackList={props.trackList} URL={URL} token={token }/>) 
     }
   
     const userNavbar = () =>{
