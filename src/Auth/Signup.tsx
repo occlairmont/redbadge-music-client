@@ -1,8 +1,5 @@
 import React from "react";
-<<<<<<< HEAD
-=======
 // import { useHistory } from "react-router-dom";
->>>>>>> 67ceeff5f642a8f17e754e0efb23a95a3dac27fc
 // import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';

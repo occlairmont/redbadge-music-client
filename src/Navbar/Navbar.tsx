@@ -5,7 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import Search from './Search';
+// import Search from './Search';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -32,7 +32,7 @@ export default function ButtonAppBar(props: any) {
           <Typography variant="h6" className={classes.title} component={Link} to="/" style={{textDecoration: 'none', color: 'white'}}>
             Red Badge
           </Typography>
-         {props.showSearch && props.token ? <Search /> : <></>}
+         {/* {props.showSearch && props.token ? <Search  /> : <></>} */}
           <Button className={classes.menuButton} component={Link} to="/music">Music</Button>
           <Button className={classes.menuButton} component={Link} to="/events">Events</Button>
          {props.token && <Button color="default" style={{marginLeft: '1em'}} 

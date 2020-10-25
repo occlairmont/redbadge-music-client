@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 // import Navbar from './Navbar/Navbar';
-import NavBar from './Navbar/NavBar';
+import Navbar from './Navbar/Navbar';
 import { Route, Switch } from 'react-router-dom';
 import Login from "./Auth/Login";
 import Footer from "./Navbar/Footer";
@@ -11,39 +11,48 @@ import EventMain from "./Events/EventMain";
 import MusicMain from "./Music/MusicMain";
 // import MusicDisplay from './Music/MusicDisplay';
 import AdminHome from "./Admin/AdminHome";
-interface Props {
-  
+import { TrackList } from './Music/MusicInterface';
+
+export interface Props {
+  trackList : TrackList
 }
+
 export const RouterApp = (props: Props) => {
   const [token, setToken] = useState<string | null>('');
   const [artist, setArtist] = useState('');
     const URL = `http://api.musixmatch.com/ws/1.1/track.search?q_artist=${artist}&page_size=50&page=1&s_track_rating=desc&apikey=b4e045669f1de0e2ba866086653af11f`
-  useEffect(() => {
+  
+    useEffect(() => {
     if (localStorage.getItem("token")) {
       setToken(localStorage.getItem("token"));
     }
   }, []);
+
   const updateToken = (token: string) => {
     localStorage.setItem("token", token);
     setToken(token);
   };
+
   const clearToken = () => {
     // localStorage.removeItem("token");
     localStorage.clear();
     setToken("");
   };
+
       const protectedViews = () => {
       return (!token ? <Login setToken={updateToken} />  : <EventMain token={token} />) 
     }
+
     const protectedViewsMusic = () => {
-      return (!token ? <Login setToken={updateToken} />  : <MusicMain URL={URL} token={token } />) 
+      return (!token ? <Login setToken={updateToken} />  : <MusicMain trackList={props.trackList} URL={URL} token={token } />) 
     }
   
     const protectedViewsAdmin = () => {
       return (!token ? <AdminLogin setToken={updateToken} />  : <AdminHome token={token} />) 
     }
+
     const userNavbar = (showSearch: any) =>{
-      return (<NavBar token={token}  clickLogout={clearToken} showSearch={showSearch}/>) 
+      return (<Navbar token={token}  clickLogout={clearToken} showSearch={showSearch}/>) 
     }
   
     return ( 
