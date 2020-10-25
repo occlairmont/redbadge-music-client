@@ -1,7 +1,7 @@
 export interface UserEvents {
     id?: number;
     owner?: number;
-    date?: Date;
+    date?: string;
     artist?: string;
     location?: string;
     time?: string;

@@ -12,7 +12,7 @@ export interface EventMainProps {
 
 export interface EventMainState {
   eventData: UserEvents[] | undefined;
-  eventUpdate: UserEvents | undefined;
+  eventUpdate: UserEvents;
   updateActive: boolean;
 }
 
@@ -21,7 +21,7 @@ class EventMain extends React.Component<EventMainProps, EventMainState> {
     super(props);
     this.state = {
       eventData: [],
-      eventUpdate: undefined,
+      eventUpdate: {},
       updateActive: false, 
     };
   }
@@ -71,8 +71,8 @@ class EventMain extends React.Component<EventMainProps, EventMainState> {
               </Paper>
             </Grid>
             <Grid xs={12} sm={7}>
-                {this.state.eventData !== undefined ? (<EventDisplay token={this.props.token} fetchEvents={this.fetchEvents} userEvent={this.state.eventData} key={2} />) : (<></>)}  
-                {/* {this.state.updateActive ? <EventEdit token={this.props.token} updateEvent={this.updateEvent} fetchEvent={this.fetchEvents} updateOff={this.updateOff} /> : <></>} */} 
+                {this.state.eventData !== undefined ? (<EventDisplay token={this.props.token} fetchEvents={this.fetchEvents} updateEvent={this.updateEvent} updateOn={this.updateOn} userEvent={this.state.eventData} key={2} />) : (<></>)}  
+                {this.state.updateActive ? <EventEdit token={this.props.token} updateEvent={this.state.eventUpdate} fetchEvent={this.fetchEvents} updateOff={this.updateOff} updateActive={this.state.updateActive}/> : <></>} 
             </Grid>
           </Grid>
         </Grid>

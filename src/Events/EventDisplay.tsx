@@ -13,8 +13,8 @@ export interface EventDisplayProps {
   key: number;
   fetchEvents(): void;
   token: string | null;
-  // updateEvent: void;
-  // updateOn(): void;
+  updateEvent: (event: UserEvents) => void;
+  updateOn(): void;
 }
 
 const useStyles = makeStyles({
@@ -79,6 +79,7 @@ export default function EventDisplay(props: EventDisplayProps) {
                 <Button size="small">Buy Tickets</Button>
               </CardActions>
               <hr/>
+                <Button onClick={()=>{props.updateEvent(userEvent); props.updateOn()}}>Update</Button>
                 <Button onClick={()=>{deleteEvent(userEvent)}}>Delete</Button>
             </Card>
           </Grid>
