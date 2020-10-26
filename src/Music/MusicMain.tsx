@@ -1,6 +1,6 @@
 import React from 'react';
 import MusicDisplay from './MusicDisplay';
-import { TrackList, TrackResponse } from './MusicInterface';
+import {  TrackResponse } from './MusicInterface';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -9,7 +9,7 @@ import Container from '@material-ui/core/Container';
 export interface MusicMainProps {
     URL: string;  
     token: string;
-    trackList : TrackList
+    // trackList : TrackList
 }
 export interface MusicMainState {
     Message: TrackResponse  | undefined;
@@ -24,7 +24,8 @@ class MusicMain extends React.Component<MusicMainProps, MusicMainState> {
 
     onSearch = (e:any) => {
         e.preventDefault();
-        fetch(`https://cors-anywhere.herokuapp.com/api.musixmatch.com/ws/1.1/track.search?q_artist=${this.state.artist}&page_size=25&page=1&s_track_rating=desc&apikey=cb3a98f799d05dea32805bf9896932fe`)
+        fetch(`https://cors-anywhere.herokuapp.com/api.musixmatch.com/ws/1.1/track.search?q_artist=${this.state.artist}&page_size=25&page=1&s_track_rating=desc&apikey=157843679a41620c9286f788772f29e0`)
+        // fetch(`https://yacdn.org/serve/https://api.musixmatch.com/ws/1.1/track.search?q_artist=${this.state.artist}&page_size=25&page=1&s_track_rating=desc&apikey=157843679a41620c9286f788772f29e0`)
         .then((res) => res.json())
         .then((json:TrackResponse) => {
             console.log(json)
@@ -76,7 +77,7 @@ class MusicMain extends React.Component<MusicMainProps, MusicMainState> {
           </div>
 </Container>
           
-            {this.state.Message!==undefined ?  < MusicDisplay trackList={this.props.trackList} token={this.props.token} message={this.state.Message}/> : <></>}
+            {this.state.Message!==undefined ?  < MusicDisplay  token={this.props.token} message={this.state.Message}/> : <></>}
             </div>
          );
     }

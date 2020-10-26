@@ -35,6 +35,7 @@ export default function ButtonAppBar(props: any) {
          {/* {props.showSearch && props.token ? <Search  /> : <></>} */}
           <Button className={classes.menuButton} component={Link} to="/music">Music</Button>
           <Button className={classes.menuButton} component={Link} to="/events">Events</Button>
+          <Button className={classes.menuButton} component={Link} to="/tables">MusicReviews</Button>
          {props.token && <Button color="default" style={{marginLeft: '1em'}} 
           onClick={props.clickLogout}>Logout</Button>}
         </Toolbar>

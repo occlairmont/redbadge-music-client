@@ -6,16 +6,16 @@ import Login from "./Auth/Login";
 import Footer from './NavBar/Footer';
 import Signup from "./Auth/Signup";
 import "./App.css";
-import { TrackList } from './Music/MusicInterface';
 import AdminLogin from "./Admin/AdminLogin";
 import EventMain from "./Events/EventMain";
 import MusicMain from "./Music/MusicMain";
 // import MusicDisplay from './Music/MusicDisplay';
 import AdminHome from "./Admin/AdminHome";
+import MusicTable from './Music/MusicTable';
 
 
 interface Props {
- trackList : TrackList
+
 }
 
 export const RouterApp = (props: Props) => {
@@ -49,7 +49,12 @@ export const RouterApp = (props: Props) => {
     }
 
     const protectedViewsMusic = () => {
-      return (!token ? <Login setToken={updateToken} />  : <MusicMain trackList={props.trackList} URL={URL} token={token } />) 
+      return (!token ? <Login setToken={updateToken} />  : <MusicMain URL={URL} token={token } />) 
+
+    }
+
+    const protectedViewsTables = () => {
+      return (!token ? <Login setToken={updateToken} />  : <MusicTable token={token } />) 
 
     }
   
@@ -72,8 +77,6 @@ export const RouterApp = (props: Props) => {
 
             <Route exact path="/music">
 
-                {protectedViews()}
-
             {userNavbar(true)}
                 {protectedViewsMusic()}
 
@@ -82,6 +85,11 @@ export const RouterApp = (props: Props) => {
             <Route exact path="/events">
             {userNavbar(false)}
             {protectedViews()}
+            </Route>
+
+            <Route exact path="/tables">
+            {userNavbar(false)}
+            {protectedViewsTables()}
             </Route>
 
             <Route exact path="/signup">

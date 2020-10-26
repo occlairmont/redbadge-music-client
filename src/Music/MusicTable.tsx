@@ -7,11 +7,19 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { TrackList } from './MusicInterface';
+import { Button, TablePagination, TextField } from '@material-ui/core';
+import Rating from '@material-ui/lab/Rating';
+// import { TrackList } from './MusicInterface';
 
 export interface MusicTableProps {
     token : string;
-    trackList : TrackList;
+}
+
+export interface MusicData {
+  artist : string;
+  text : string;
+  rating : number; 
+  id : number; 
 }
 
 const useStyles = makeStyles({
@@ -36,19 +44,16 @@ const useStyles = makeStyles({
  
 const MusicTable: React.SFC<MusicTableProps> = (props: MusicTableProps) => {
     const classes = useStyles();
-    const [data, setData] = React.useState('');
+    const [data, setData] = React.useState<MusicData[]>();
+    const [editModeActive, setEditModeActive] = React.useState(false); 
     const [dataText, setDataText] = React.useState('');
     const [dataRating, setDataRating] = React.useState<number | null > (2.5)
+    const [rowId, setRowId] =React.useState(0);
 
 
     const handleSubmit = () => {
         fetch(`http://localhost:3001/music`, {
             method: 'GET',
-            body: JSON.stringify({
-                artist: props.trackList.track.artist_name,
-                text: dataText,
-                rating: dataRating,
-            }),
             headers: new Headers({
                 'Content-Type' : 'application/json',
                 Authorization : props.token !== null ? props.token : '',
@@ -57,17 +62,12 @@ const MusicTable: React.SFC<MusicTableProps> = (props: MusicTableProps) => {
         .then((res) => res.json())
         .then((json) =>{
             console.log(json);
+            setData(json);
         })
     }
-
-    React.useEffect(() => {
-       fetch(`http:localhost:3001/music/`, {
+    function fetchAll(){
+      fetch(`http://localhost:3001/music/`, {
          method: 'GET', 
-         body: JSON.stringify({
-           artist: props.trackList.track.artist_name,
-           text: dataText,
-           rating: dataRating,
-         }),
          headers: new Headers({
            'Content-Type' : 'application/json',
            Authorization : props.token !== null ? props.token : '',
@@ -78,18 +78,66 @@ const MusicTable: React.SFC<MusicTableProps> = (props: MusicTableProps) => {
          console.log(data);
         setData(data)
        })
+    }
+
+
+    React.useEffect(() => {
+       fetchAll()
     }, [])
 
 
-    // function Edit(){
+    function Edit(row: any){
+      fetch(`http://localhost:3001/music/${row.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+            music: {
+            song: row.song,
+            artist: row.artist,
+            album: row.album,
+            text: dataText,
+            rating: dataRating,
+            }
+        }),
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            Authorization: props.token !== null ? props.token : '',
+        }),
+    })
+    .then((res) => res.json())
+    .then((music) => {
+        console.log(music);
+        setEditModeActive(false);
+        fetchAll();
+    })}
+      //conduct the fetch that will make it an edit
+      //method: PUT
+     //After Edit Complete do the following
+     //change editActive to false
+     //Tablerefresh
+    
 
-    // }
 
-    // function Delete(){
-
-    // }
+    function Delete(id: number){
+      fetch(`http://localhost:3001/music/${id}`, {
+         method: 'DELETE', 
+         headers: new Headers({
+           'Content-Type' : 'application/json',
+           Authorization : props.token !== null ? props.token : '',
+         })
+       })
+       .then((res) => res.json())
+       .then((data) => {
+         console.log(data);
+        fetchAll();
+       })
+    }
   
-   
+   function ToggleEditMode(row : any) {
+     setDataText(row.text);
+     setDataRating(row.rating);
+    setEditModeActive(!editModeActive);
+    setRowId(row.id);
+   }
 
 
 
@@ -103,14 +151,20 @@ const MusicTable: React.SFC<MusicTableProps> = (props: MusicTableProps) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.data.map((row: any , index: any) => (
+          {data != undefined && data.sort((a, b) => a.id - b.id ).map((row: any , index: any) => (
             <TableRow key={index}>
               <TableCell component="th" scope="row">
                 {row.artist}
               </TableCell>
-              <TableCell align="right">{row.text}</TableCell>
-              <TableCell align="right">{row.rating}</TableCell>
-              <TableCell align="right"> Edit and Delete Buttons Here</TableCell>// Buttons
+              <TableCell align="right">{editModeActive && rowId === row.id ? <TextField id="outlined-basic" label="Write a Review" variant="outlined" value={dataText} onChange={(e) => setDataText(e.target.value) } /> : row.text}</TableCell>
+          <TableCell align="right"> {editModeActive && rowId === row.id ? <Rating  name={`${Math.random()*10}`} value={dataRating} onChange={(e, newValue) => setDataRating(newValue)} /> :  <Rating name={`${Math.random()*10}`} value={row.rating} readOnly  /> } </TableCell>
+              <TableCell align="right"> {editModeActive && rowId == row.id ? <div> <Button onClick={() => Edit(row)}>Submit Change</Button> <Button onClick={() => setEditModeActive(false)}>Cancel</Button>  </div> :
+              <div>
+              <Button onClick={() => Delete(row.id)}>Delete</Button>
+             <Button onClick={() => ToggleEditMode(row)}>Edit</Button>
+          </div> }
+
+              </TableCell>
 
             </TableRow>
           ))}
