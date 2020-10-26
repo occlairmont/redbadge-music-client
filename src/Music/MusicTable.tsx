@@ -6,10 +6,11 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+// import Paper from '@material-ui/core/Paper';
 import { Button, TextField } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
-// import { TrackList } from './MusicInterface';
+import DeleteIcon from '@material-ui/icons/Delete';
+import SaveIcon from '@material-ui/icons/Save';
 
 export interface MusicTableProps {
     token : string;
@@ -22,25 +23,31 @@ export interface MusicData {
   id : number; 
 }
 
+
 const useStyles = makeStyles({
+  
     table: {
-      minWidth: 250,
+      // minWidth: 350,
+      maxWidth: 1200,
+      border: '5px solid black',
+      marginLeft: 350,
+      marginTop: 100,
+      height: 300,
+      alignItems: 'center',
     },
+    // palette: {
+    //   primary: {
+    //     light: '#757ce8',
+    //   main: '#3f50b5',
+    //   dark: '#002884',
+    //   contrastText: '#fff',
+    //   }
+    // }
   });
-// create a function that will fetch all the data DONE
-  // UseEffect that will run a fetch all function. DONE
-  // useState that will hold the fetched data (data, setData) DONE
-  // the const data needs to go away DONE
-  // once fetch is finished you will need to store that in setData DONE
-
-  // edit function
-
-
-  // delete function
 
 
   const headers=['Artist', 'Review Notes', 'Star Rating', 'edit/delete']
-//   const data=[{artist: 'Lady Gaga', rating: '2.5', text: 'yfgyuegfw'}, {artist: 'Lady Gaga', rating: '2.5', text: 'yfgyuegfw'}, {artist: 'Lady Gaga', rating: '2.5', text: 'yfgyuegfw'}]
+
  
 const MusicTable: React.SFC<MusicTableProps> = (props: MusicTableProps) => {
     const classes = useStyles();
@@ -109,12 +116,7 @@ const MusicTable: React.SFC<MusicTableProps> = (props: MusicTableProps) => {
         setEditModeActive(false);
         fetchAll();
     })}
-      //conduct the fetch that will make it an edit
-      //method: PUT
-     //After Edit Complete do the following
-     //change editActive to false
-     //Tablerefresh
-    
+     
 
 
     function Delete(id: number){
@@ -142,26 +144,33 @@ const MusicTable: React.SFC<MusicTableProps> = (props: MusicTableProps) => {
 
 
     return ( 
-        <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
+        <TableContainer>
+      <Table className={classes.table} aria-label="simple table"style={{backgroundColor: 'lightslategrey'}}>
+        <TableHead >
           <TableRow>
-    {headers.map(header =>  <TableCell>{header}</TableCell>)}
+    {headers.map(header =>  <TableCell component='th' scope='row' style={{color: 'white', fontFamily: 'monospace', fontSize: '30px'}}>{header}</TableCell>)}
            
           </TableRow>
         </TableHead>
         <TableBody>
           {data != undefined && data.sort((a, b) => a.id - b.id ).map((row: any , index: any) => (
             <TableRow key={index}>
-              <TableCell component="th" scope="row">
+              <TableCell component="th" scope="row" style={{color: 'white', fontFamily: 'monospace', fontSize: '25px'}}>
                 {row.artist}
               </TableCell>
-              <TableCell align="right">{editModeActive && rowId === row.id ? <TextField id="outlined-basic" label="Write a Review" variant="outlined" value={dataText} onChange={(e) => setDataText(e.target.value) } /> : row.text}</TableCell>
-          <TableCell align="right"> {editModeActive && rowId === row.id ? <Rating  name={`${Math.random()*10}`} value={dataRating} onChange={(e, newValue) => setDataRating(newValue)} /> :  <Rating name={`${Math.random()*10}`} value={row.rating} readOnly  /> } </TableCell>
-              <TableCell align="right"> {editModeActive && rowId == row.id ? <div> <Button onClick={() => Edit(row)}>Submit Change</Button> <Button onClick={() => setEditModeActive(false)}>Cancel</Button>  </div> :
+
+              <TableCell component='th' scope='row' style={{color: 'white', fontFamily: 'cursive', fontSize: '25px'}}>{editModeActive && rowId === row.id ? <TextField id="outlined-basic" label="Write a Review" variant="outlined"  value={dataText} onChange={(e) => setDataText(e.target.value) } /> : row.text}</TableCell>
+
+          <TableCell component='th' scope='row'> {editModeActive && rowId === row.id ? <Rating  name={`${Math.random()*10}`} value={dataRating} onChange={(e, newValue) => setDataRating(newValue)} /> :  <Rating name={`${Math.random()*10}`} value={row.rating} readOnly  /> } </TableCell>
+
+              <TableCell component='th' scope='row'> {editModeActive && rowId == row.id ? <div>
+               <Button variant='contained' color='primary' startIcon={<SaveIcon />} onClick={() => Edit(row)}>Save Changes</Button>
+               <Button variant='contained' color='secondary' onClick={() => setEditModeActive(false)}>Cancel</Button>  </div> :
               <div>
-              <Button onClick={() => Delete(row.id)}>Delete</Button>
-             <Button onClick={() => ToggleEditMode(row)}>Edit</Button>
+
+             <Button variant='contained' color='primary' onClick={() => ToggleEditMode(row)}>Edit</Button>
+              <Button variant='contained' color='secondary' startIcon={<DeleteIcon />} onClick={() => Delete(row.id)}>Delete</Button>
+
           </div> }
 
               </TableCell>

@@ -4,7 +4,7 @@ import * as React from 'react';
 import { TrackList } from './MusicInterface';
 import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+// import FavoriteIcon from '@material-ui/icons/Favorite';
 import clsx from 'clsx';
 
 
@@ -88,7 +88,7 @@ const MusicCards: React.SFC<MusicCardsProps> = (props: MusicCardsProps) => {
     return ( 
       
          <Grid item xs={4} sm={4} className={classes.cardspacing} key={props.index}>
-        <Card className={classes.root} style={{backgroundColor: 'darksalmon'}}>
+        <Card className={classes.root} style={{backgroundColor: 'lightsalmon'}}>
           <CardContent>
             <Typography variant="body2" color='textPrimary' component="p">
             {trackList.track.artist_name}
@@ -104,9 +104,9 @@ const MusicCards: React.SFC<MusicCardsProps> = (props: MusicCardsProps) => {
             </Typography>
           </CardContent>
           <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites" style={{color: 'red'}}>
-              <FavoriteIcon />
-            </IconButton>
+            {/* <IconButton aria-label="add to favorites" style={{color: 'red'}}>
+              <FavoriteIcon /> */}
+            {/* </IconButton> */}
             <IconButton
               className={clsx(classes.expand, {
                 [classes.expandOpen]: expanded,
@@ -127,7 +127,7 @@ const MusicCards: React.SFC<MusicCardsProps> = (props: MusicCardsProps) => {
               <form className={classes.root} noValidate autoComplete="off">
               <TextField id="outlined-basic" label="Write a Review" variant="outlined" value={textField} onChange={(e) => setTextField(e.target.value) } />
               </form>
-              <Button onClick={(e) => handleSubmit()}>Click to Submit!</Button>
+              <Button variant='outlined' color='secondary' onClick={(e) => handleSubmit()}>Click to Submit!</Button>
             </CardContent>
           </Collapse>
         </Card>
