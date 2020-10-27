@@ -18,11 +18,6 @@ class AdminHome extends React.Component<AdminHomeProps, AdminHomeState> {
         eventUpdate: undefined,
         updateActive: false,  };
     }
-  
-//     onSubmit(e: any) {
-//       e.preventDefault();
-
-
 
 getInfo = () => {
 
@@ -80,30 +75,3 @@ render() {
       email: string;
       password: string;
   }
-
-
-
-
-
-
-    //       const endpointURL = `http://localhost:3001/admin/eventinfo`;
-//       const body: RequestBodyLogin = {
-//         admin: {
-//           email: this.state.email,
-//           password: this.state.password,
-//         },
-//       };
-//       let eventInfoHeaders = new Headers();
-//       eventInfoHeaders.append("Content-Type", "application/json");
-  
-//       const requestOptions = {
-//         method: "GET",
-//         headers: eventInfoHeaders,
-//         body: JSON.stringify(body),
-//       };
-//       fetch(endpointURL, requestOptions)
-//         .then((res: any) => res.json())
-//         .then((json: ResponseLogin) => {
-//           this.props.setToken(json.sessionToken);
-//           console.log(json);
-//         });
