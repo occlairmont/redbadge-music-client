@@ -1,3 +1,4 @@
+  
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -65,7 +66,7 @@ export default function EventDisplay(props: EventDisplayProps) {
       <Grid container>
         {props.userEvent.map((userEvent: UserEvents, index: number) => (
           <Grid item xs={6} sm={6} className={classes.cardspacing} key={index}>
-            <Card className={classes.root}>
+            <Card className={classes.root} style={{backgroundColor: 'lightsalmon'}}>
               <CardContent> 
                 <Typography variant="h4" component="h2" gutterBottom>
                   {userEvent.artist}                  
@@ -85,7 +86,7 @@ export default function EventDisplay(props: EventDisplayProps) {
               <CardActions>
                 <Button size="small" href={userEvent.link}>Buy Tickets</Button>
               </CardActions>
-              <Accordion>
+              <Accordion style={{backgroundColor: 'lightsalmon'}}>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel1a-content"
@@ -103,4 +104,3 @@ export default function EventDisplay(props: EventDisplayProps) {
     </div>
   );
 }
-

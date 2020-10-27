@@ -57,7 +57,6 @@ class AdminLogin extends React.Component<AdminProps, AdminState> {
       .then((res: any) => res.json())
       .then((json: ResponseLogin) => {
         this.props.setToken(json.sessionToken);
-        console.log(json);
       });
   }
 
