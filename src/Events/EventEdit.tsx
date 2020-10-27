@@ -76,77 +76,76 @@ class EventEdit extends React.Component<EventEditProps, EventEditState> {
     render() { 
         return ( 
         <div>
-            test edit
-       <Dialog open={this.props.updateActive} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-         <DialogTitle id="form-dialog-title">Update Event</DialogTitle>
-         <DialogContent>
-           <Typography>
-                Artist
-           </Typography>
-           <TextField
-             autoFocus
-             margin="dense"
-             id="name"
-             type="text"
-             onChange={(e) => this.setState({artist: e.target.value})}
-             placeholder="Artist"
-             value={this.state.artist}
-             fullWidth
-           />
-           <TextField
-             autoFocus
-             margin="dense"
-             id="name"
-             type="text"
-             onChange={(e) => this.setState({date: e.target.value})}
-             placeholder="date"
-             value={this.formatDate(this.state.date)}
-             fullWidth
-           />
-            <TextField
-             autoFocus
-             margin="dense"
-             id="name"
-             type="text"
-             onChange={(e) => this.setState({time: e.target.value})}
-             placeholder="Artist"
-             value={this.state.time}
-             fullWidth
-           />
-           <TextField
-             autoFocus
-             margin="dense"
-             id="name"
-             type="text"
-             onChange={(e) => this.setState({location: e.target.value})}
-             placeholder="Artist"
-             value={this.state.location}
-             fullWidth
-           />
-           <TextField
-             autoFocus
-             margin="dense"
-             id="name"
-             type="text"
-             onChange={(e) => this.setState({link: e.target.value})}
-             placeholder="Artist"
-             value={this.state.link}
-             fullWidth
-           />
-            <FormControlLabel
-            control={<Checkbox checked={this.state.hasAttended} onChange={() =>{this.setState({hasAttended: !this.state.hasAttended})}} name="Attended" />}
-            label="Attended?"
-            />
-         </DialogContent>
-         <DialogActions>
-           <Button onClick={this.handleClose} color="primary">
-             Cancel
-           </Button>
-           <Button onClick={() => this.onSubmit()} color="primary">
-             Save
-           </Button>
-         </DialogActions>
-       </Dialog>
+          <Dialog open={this.props.updateActive} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+            <DialogTitle id="form-dialog-title">Update Event</DialogTitle>
+            <DialogContent>
+              <Typography>
+                    Artist
+              </Typography>
+              <TextField
+                autoFocus
+                margin="dense"
+                id="name"
+                type="text"
+                onChange={(e) => this.setState({artist: e.target.value})}
+                placeholder="Artist"
+                value={this.state.artist}
+                fullWidth
+              />
+              <TextField
+                autoFocus
+                margin="dense"
+                id="name"
+                type="text"
+                onChange={(e) => this.setState({date: e.target.value})}
+                placeholder="date"
+                value={this.formatDate(this.state.date)}
+                fullWidth
+              />
+                <TextField
+                autoFocus
+                margin="dense"
+                id="name"
+                type="text"
+                onChange={(e) => this.setState({time: e.target.value})}
+                placeholder="Artist"
+                value={this.state.time}
+                fullWidth
+              />
+              <TextField
+                autoFocus
+                margin="dense"
+                id="name"
+                type="text"
+                onChange={(e) => this.setState({location: e.target.value})}
+                placeholder="Artist"
+                value={this.state.location}
+                fullWidth
+              />
+              <TextField
+                autoFocus
+                margin="dense"
+                id="name"
+                type="text"
+                onChange={(e) => this.setState({link: e.target.value})}
+                placeholder="Artist"
+                value={this.state.link}
+                fullWidth
+              />
+                {/* <FormControlLabel
+                control={<Checkbox checked={this.state.hasAttended} onChange={() =>{this.setState({hasAttended: !this.state.hasAttended})}} name="Attended" />}
+                label="Attended?"
+                /> */}
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="primary">
+                Cancel
+              </Button>
+              <Button onClick={() => this.onSubmit()} color="primary">
+                Save
+              </Button>
+            </DialogActions>
+          </Dialog>
        </div> );
     }
 }

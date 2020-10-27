@@ -8,12 +8,9 @@ import {withStyles} from "@material-ui/styles"
 import EventDateSearch from "./EventDateSearch";
 
 const useStyles = (theme: Theme) => ({
-  button: {
-    width: "100%",
-    justifyContent: "flex-end",
-    paddingTop: 0,
-    paddingRight: 0,
-    paddingLeft: 0,
+  root: {
+    margin: "5px",
+    // paddingRight: 2,
   },
 })
 
@@ -35,7 +32,7 @@ class EventMain extends React.Component<EventMainProps, EventMainState> {
       eventData: [], 
       eventUpdate: {},
       updateActive: false, 
-      filterActive: true,
+      filterActive: false,
     };
   }
 
@@ -54,7 +51,7 @@ class EventMain extends React.Component<EventMainProps, EventMainState> {
           eventData: json,
         });
       });
-  }
+  } 
 
   updateEventView = (events: UserEvents[]) => {
     this.setState({eventData: events})
@@ -72,30 +69,36 @@ class EventMain extends React.Component<EventMainProps, EventMainState> {
     this.setState({updateActive: false})
   }
 
-  changeFilter = () => {
-    this.setState({filterActive: !this.state.filterActive})
-  }
-
-  // updateOff = () => {
-  // this.setState({filterActive: false})
+  // filterOn = () => {
+  //   this.setState({filterActive: true})
   // }
 
+  // filterOff = () => {
+  // this.setState({filterActive: false})
+  // }
 
   componentDidMount() {
     this.fetchEvents();
   }
 
   render() {
+    const { classes }: any = this.props;
     return (
-      <div>
+      <div style={{padding:20}}>
         <Grid >
-          <Grid container item spacing={3}>
-            <Grid item xs={12} sm={4}>
-              <Paper >
+          <Grid container item spacing={3} >
+            <Grid item xs={12} sm={4} >
+              <Paper style={{backgroundColor: 'lightgrey'}} >
+                <EventDateSearch token={this.props.token} eventData={this.updateEventView} />
+              </Paper>
+              <br></br>
+              <Paper>
                 <EventCreate token={this.props.token} fetchEvents={this.fetchEvents} />
-                <EventDateSearch token={this.props.token} eventData={this.updateEventView}/>
               </Paper>
             </Grid>
+            {/* <Grid item xs={12} sm={8}>
+              <EventFilter filterOff={this.filterOff}/>
+            </Grid> */}
             <Grid item xs={12} sm={8}>
                 {this.state.eventData !== undefined ? (<EventDisplay token={this.props.token} fetchEvents={this.fetchEvents} updateEvent={this.updateEvent} updateOn={this.updateOn} userEvent={this.state.filterActive ? this.state.eventData.filter(row => row.hasAttended == true) : this.state.eventData} key={2} />) : (<></>)}  
                 {this.state.updateActive ? <EventEdit token={this.props.token} updateEvent={this.state.eventUpdate} fetchEvent={this.fetchEvents} updateOff={this.updateOff} updateActive={this.state.updateActive}/> : <></>} 

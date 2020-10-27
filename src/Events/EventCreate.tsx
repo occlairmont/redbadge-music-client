@@ -73,18 +73,19 @@ class EventCreate extends React.Component<EventCreateProps, EventCreateState> {
   render() {
     return (
       <div>
-        <Accordion>
+        <Accordion style={{backgroundColor: 'lightgrey'}}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header">
-            <Typography >Create Event</Typography>
+            <Typography variant="h5" component="h2">Create Event</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <form>
-              <h2>
-                Log the next concert.
-              </h2>
+              <span>
+                Log your next event here. Enter as much information as you need.
+              </span>
+              <br/>
               <FormGroup>
                 <Input
                   type="text"
@@ -124,10 +125,11 @@ class EventCreate extends React.Component<EventCreateProps, EventCreateState> {
                   value={this.state.link}
                 />
               </FormGroup>
-              <FormControlLabel
+              {/* <FormControlLabel
               control={<Checkbox checked={this.state.hasAttended} onChange={() =>{this.setState({hasAttended: !this.state.hasAttended})}} name="Attended" />}
               label="Attended?"
-              />
+              /> */}
+              <br/>
               <Button onClick={() => this.onSubmit()} variant="outlined">
                 Save
               </Button>
