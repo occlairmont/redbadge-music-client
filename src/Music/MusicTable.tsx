@@ -11,7 +11,6 @@ import { Button, TextField } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
-import APIURL from '../helpers/environment';
 
 export interface MusicTableProps {
     token : string;
@@ -29,11 +28,11 @@ const useStyles = makeStyles({
   
     table: {
       // minWidth: 350,
-      maxWidth: 1200,
+      // maxWidth: 1200,
       border: '5px solid black',
-      marginLeft: 350,
+      // marginLeft: 350,
       marginTop: 100,
-      height: 300,
+      // height: 300,
       alignItems: 'center',
     },
     // palette: {
@@ -47,7 +46,7 @@ const useStyles = makeStyles({
   });
 
 
-  const headers=['Artist', 'Review Notes', 'Star Rating', 'edit/delete']
+  const headers=['Artist', 'Review Notes', 'Star Rating', 'Edit/Delete']
 
  
 const MusicTable: React.SFC<MusicTableProps> = (props: MusicTableProps) => {
@@ -60,7 +59,7 @@ const MusicTable: React.SFC<MusicTableProps> = (props: MusicTableProps) => {
 
 
     const handleSubmit = () => {
-        fetch(`{APIURL}/music`, {
+        fetch(`http://localhost:3001/music`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type' : 'application/json',
@@ -74,7 +73,7 @@ const MusicTable: React.SFC<MusicTableProps> = (props: MusicTableProps) => {
         })
     }
     function fetchAll(){
-      fetch(`${APIURL}/music/`, {
+      fetch(`http://localhost:3001/music/`, {
          method: 'GET', 
          headers: new Headers({
            'Content-Type' : 'application/json',
@@ -95,7 +94,7 @@ const MusicTable: React.SFC<MusicTableProps> = (props: MusicTableProps) => {
 
 
     function Edit(row: any){
-      fetch(`${APIURL}/music/${row.id}`, {
+      fetch(`http://localhost:3001/music/${row.id}`, {
         method: 'PUT',
         body: JSON.stringify({
             music: {
@@ -121,7 +120,7 @@ const MusicTable: React.SFC<MusicTableProps> = (props: MusicTableProps) => {
 
 
     function Delete(id: number){
-      fetch(`{APIURL}/music/${id}`, {
+      fetch(`http://localhost:3001/music/${id}`, {
          method: 'DELETE', 
          headers: new Headers({
            'Content-Type' : 'application/json',

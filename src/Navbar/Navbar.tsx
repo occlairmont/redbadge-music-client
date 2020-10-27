@@ -31,7 +31,7 @@ export default function ButtonAppBar(props: any) {
             <MenuIcon />
           </IconButton> */}
           <Typography variant="h6" className={classes.title} component={Link} to="/" style={{textDecoration: 'none', color: 'white'}}>
-            TheRedVinyl 
+            Red Vinyl 
           </Typography>
          {/* {props.showSearch && props.token ? <Search  /> : <></>} */}
           <Button className={classes.menuButton} component={Link} to="/music">Music</Button>

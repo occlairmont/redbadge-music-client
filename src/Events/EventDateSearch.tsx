@@ -1,19 +1,20 @@
 import React from 'react';
 import DateFnsUtils from '@date-io/date-fns';
-import { Button, Grid, Typography } from '@material-ui/core';
+import { Button, FormControlLabel, Grid, Switch, Typography } from '@material-ui/core';
 import { KeyboardDatePicker,MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { UserEvents } from './EventInterface';
-import APIURL from '../helpers/environment';
 
 export interface EventDateSearchProps {
     token: string | null;
     eventData: (event: UserEvents[]) => void;
+    // filterOff(): void;
 }
  
 export interface EventDateSearchState {
     startDate: string | null | undefined;
     endDate: string | null | undefined;
     date: string;
+    // hasAttended: boolean;
 }
  
 class EventDateSearch extends React.Component<EventDateSearchProps, EventDateSearchState> {
@@ -22,7 +23,8 @@ class EventDateSearch extends React.Component<EventDateSearchProps, EventDateSea
         this.state = {  
             startDate: "",
             endDate: "",
-            date: ""
+            date: "",
+            // hasAttended: false,
          };
     }
 
@@ -34,7 +36,7 @@ class EventDateSearch extends React.Component<EventDateSearchProps, EventDateSea
     onSubmit = () =>{
         const start = typeof this.state.startDate == "string" && this.formatDate(this.state.startDate)
         const end = typeof this.state.endDate == "string" && this.formatDate(this.state.endDate)
-        fetch("${APIURL}/events/search-dates", {
+        fetch("http://localhost:3001/events/search-dates", {
             method: "POST",
             body: JSON.stringify({
                 startDate: start,
@@ -54,9 +56,9 @@ class EventDateSearch extends React.Component<EventDateSearchProps, EventDateSea
 
     render() { 
         return ( 
-            <div>
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <Grid container justify="space-around">
+            <div style={{padding: 15}}>
+                <MuiPickersUtilsProvider utils={DateFnsUtils} >
+                    <Grid container justify="center" style={{backgroundColor: 'lightgrey'}}>
                         <Typography>Start</Typography>
                         <KeyboardDatePicker
                             variant="inline"
@@ -70,12 +72,13 @@ class EventDateSearch extends React.Component<EventDateSearchProps, EventDateSea
                             }}
                          />
                     </Grid>
-                    <Grid container justify="space-around">
+                    <Grid container justify="center" style={{backgroundColor: 'lightgrey'}}>
+                        <Typography>End</Typography>
                         <KeyboardDatePicker
                             variant="inline"
                             format="MM/dd/yyyy"
                             margin="normal"
-                            label="End"
+                            // label="End"
                             value={this.state.endDate}
                             onChange={(date: any, value) => {this.setState({endDate: value})}}
                             KeyboardButtonProps={{
@@ -84,7 +87,7 @@ class EventDateSearch extends React.Component<EventDateSearchProps, EventDateSea
                          />
                     </Grid>
                 </MuiPickersUtilsProvider>
-                <Button onClick={this.onSubmit}>Search</Button>
+                <Button style={{backgroundColor: 'lightgrey', justifyContent: "center"}} onClick={this.onSubmit} >Search</Button>
             </div>
          );
     }

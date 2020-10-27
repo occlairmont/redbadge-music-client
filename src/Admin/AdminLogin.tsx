@@ -9,6 +9,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import APIURL from '../helpers/environment';
+import Disc from '../assets/disc.png';
 
 export interface AdminProps {
   setToken: any;
@@ -18,6 +19,7 @@ export interface AdminProps {
 export interface AdminState {
   email: string;
   password: string;
+  
 }
 
 class AdminLogin extends React.Component<AdminProps, AdminState> {
@@ -134,7 +136,10 @@ class AdminLogin extends React.Component<AdminProps, AdminState> {
       <Box mt={8}>
         
       </Box>
-     
+      <img style={{
+        width: '100%',
+      height: 'auto',
+      margin: '0 auto'}} src={Disc} />
     </Container>
     {/* <Footer/> */}
     </>

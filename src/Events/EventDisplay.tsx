@@ -1,4 +1,3 @@
-  
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -9,7 +8,6 @@ import Typography from "@material-ui/core/Typography";
 import {UserEvents} from "./EventInterface";
 import { Accordion, AccordionDetails, AccordionSummary, Grid } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import APIURL from '../helpers/environment';
 
 
 export interface EventDisplayProps {
@@ -47,7 +45,7 @@ export default function EventDisplay(props: EventDisplayProps) {
   const classes = useStyles();
 
   const deleteEvent = (event: UserEvents) =>{
-    fetch(`${APIURL}/events/delete/${event.id}`,{
+    fetch(`http://localhost:3001/events/delete/${event.id}`,{
     method: "DELETE",
     headers: new Headers({
         "Content-Type": "application/json",
@@ -67,7 +65,7 @@ export default function EventDisplay(props: EventDisplayProps) {
       <Grid container>
         {props.userEvent.map((userEvent: UserEvents, index: number) => (
           <Grid item xs={6} sm={6} className={classes.cardspacing} key={index}>
-            <Card className={classes.root}>
+            <Card className={classes.root} style={{backgroundColor: 'lightsalmon'}}>
               <CardContent> 
                 <Typography variant="h4" component="h2" gutterBottom>
                   {userEvent.artist}                  
@@ -87,7 +85,7 @@ export default function EventDisplay(props: EventDisplayProps) {
               <CardActions>
                 <Button size="small" href={userEvent.link}>Buy Tickets</Button>
               </CardActions>
-              <Accordion>
+              <Accordion style={{backgroundColor: 'lightsalmon'}}>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel1a-content"

@@ -9,7 +9,6 @@ import "./App.css";
 import AdminLogin from "./Admin/AdminLogin";
 import EventMain from "./Events/EventMain";
 import MusicMain from "./Music/MusicMain";
-// import MusicDisplay from './Music/MusicDisplay';
 import AdminHome from "./Admin/AdminHome";
 import MusicTable from './Music/MusicTable';
 
@@ -45,11 +44,11 @@ export const RouterApp = (props: Props) => {
         console.log(token);
     
 
-      return (!token ? <Login setToken={updateToken} />  : <EventMain token={token} />) 
+      return (!token ? <Login setToken={updateToken} />  : <MusicMain URL={URL} token={token} />) 
     }
 
-    const protectedViewsMusic = () => {
-      return (!token ? <Login setToken={updateToken} />  : <MusicMain URL={URL} token={token } />) 
+    const protectedViewsEvents = () => {
+      return (!token ? <Login setToken={updateToken} />  : <EventMain token={token } />) 
 
     }
 
@@ -60,6 +59,10 @@ export const RouterApp = (props: Props) => {
   
     const protectedViewsAdmin = () => {
       return (!token ? <AdminLogin setToken={updateToken} />  : <AdminHome token={token} />) 
+    }
+
+    const protectedViewsSignup = () => {
+      return (!token ? <Signup setToken={updateToken} />  : <MusicMain URL={URL} token={token} />) 
     }
 
     const userNavbar = (showSearch: any) =>{
@@ -78,13 +81,13 @@ export const RouterApp = (props: Props) => {
             <Route exact path="/music">
 
             {userNavbar(true)}
-                {protectedViewsMusic()}
+                {protectedViews()}
 
             </Route>
 
             <Route exact path="/events">
             {userNavbar(false)}
-            {protectedViews()}
+            {protectedViewsEvents()}
             </Route>
 
             <Route exact path="/tables">
@@ -94,7 +97,7 @@ export const RouterApp = (props: Props) => {
 
             <Route exact path="/signup">
             {userNavbar(false)}
-              <Signup setToken={setToken} />
+              {protectedViewsSignup()}
             </Route>
 
             <Route exact path="/login">

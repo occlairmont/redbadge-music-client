@@ -3,14 +3,17 @@ import React from "react";
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import APIURL from '../helpers/environment';
+import Disc from '../assets/disc.png';
+
+
 
 export interface LoginProps {
   setToken: any;
@@ -71,7 +74,13 @@ class Login extends React.Component<LoginProps, LoginState> {
   
   render() {
     return (
-      <>
+      <div>
+    <div>
+       {/* <img style={{width: '65vw',
+  height: 'auto',
+  display: 'block',
+  margin: '0 auto', zIndex: 10}} src={Disc} /> */}
+  </div>
       <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div style={{marginTop: '3em',
@@ -111,10 +120,10 @@ class Login extends React.Component<LoginProps, LoginState> {
             autoComplete="current-password"
           onChange={(e) => this.setState({ password: e.target.value })}
         />
-          <FormControlLabel
+          {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
-          />
+          /> */}
          <Button
             type="submit"
             fullWidth
@@ -127,25 +136,27 @@ class Login extends React.Component<LoginProps, LoginState> {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
+              </Grid>
             <Grid item>
               <Link href="/signup" variant="body2">
                 {"Don't have an account? Create one."}
               </Link>
             </Grid>
+            <Grid item xs>
+            </Grid>
           </Grid>
         </form>
       </div>
       <Box mt={8}>
-        
+      
       </Box>
-     
+      <img style={{
+        width: '100%',
+      height: 'auto',
+      margin: '0 auto'}} src={Disc} />
     </Container>
     {/* <Footer/> */}
-    </>
+    </div>
     );
   }
 }
