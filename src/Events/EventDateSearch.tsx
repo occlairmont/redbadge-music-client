@@ -38,7 +38,7 @@ class EventDateSearch extends React.Component<EventDateSearchProps, EventDateSea
             body: JSON.stringify({
                 startDate: start,
                 endDate: end,
-            }), 
+            }),
             headers: new Headers ({
                 "Content-Type": "application/json",
                 "Authorization" : this.props.token !== null ? this.props.token : ""

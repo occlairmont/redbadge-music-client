@@ -6,6 +6,7 @@ export interface UserEvents {
     location?: string;
     time?: string;
     link?: string;
+    hasAttended?: boolean;
 }
 
 export interface Options {

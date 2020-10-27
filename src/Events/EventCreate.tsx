@@ -1,6 +1,6 @@
 import React from "react";
-import { Button, FormGroup, Input } from "@material-ui/core/";
-// import { UserEvents } from "./EventInterface";
+import { Button, Checkbox, FormControlLabel, FormGroup, Input, Accordion, AccordionSummary, AccordionDetails, Typography } from "@material-ui/core/";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
 export interface EventCreateProps {
   token: string | null;
@@ -13,6 +13,7 @@ export interface EventCreateState {
   location: string;
   time: string;
   link: string;
+  hasAttended: boolean;
 }
 
 class EventCreate extends React.Component<EventCreateProps, EventCreateState> {
@@ -24,6 +25,7 @@ class EventCreate extends React.Component<EventCreateProps, EventCreateState> {
       location: "",
       time: "",
       link: "",
+      hasAttended: true,
     };
   }
 
@@ -37,6 +39,7 @@ class EventCreate extends React.Component<EventCreateProps, EventCreateState> {
         location: this.state.location,
         time: this.state.time,
         link: this.state.link,
+        hasAttended: this.state.hasAttended,
       }),
       headers: new Headers({
         "Content-Type": "application/json",
@@ -52,63 +55,88 @@ class EventCreate extends React.Component<EventCreateProps, EventCreateState> {
           location: this.state.location,
           time: this.state.time,
           link: this.state.link,
+          hasAttended: this.state.hasAttended,
         });
         this.props.fetchEvents();
       });
   }
 
+  formatDate = (dateTime: any) => {
+    let date = new Date(dateTime)
+    return date.toLocaleString().split(",")[0]
+  }
+
+  // handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+  //   this.setState({this.state.hasAttended, [e.target.value]: e.target.checked})
+  // }
+
   render() {
     return (
-      <form>
-        <h3>
-          Log the next concert.
-        </h3>
-        <FormGroup>
-          <Input
-            type="text"
-            onChange={(e) => this.setState({date: e.target.value})}
-            placeholder="MM/DD/YYYY"
-            value={this.state.date}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Input
-            type="text"
-            onChange={(e) => this.setState({time: e.target.value})}
-            placeholder="Time"
-            value={this.state.time}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Input
-            type="text"
-            onChange={(e) => this.setState({artist: e.target.value})}
-            placeholder="Artist"
-            value={this.state.artist}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Input
-            type="text"
-            onChange={(e) => this.setState({location: e.target.value})}
-            placeholder="Location"
-            value={this.state.location}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Input
-            onChange={(e) => this.setState({link: e.target.value})}
-            placeholder="Link for Tickets"
-            value={this.state.link}
-          />
-        </FormGroup>
-        <Button onClick={() => this.onSubmit()} variant="outlined">
-          Save
-        </Button>
-      </form>
+      <div>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header">
+            <Typography >Create Event</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <form>
+              <h2>
+                Log the next concert.
+              </h2>
+              <FormGroup>
+                <Input
+                  type="text"
+                  onChange={(e) => this.setState({date: e.target.value})}
+                  placeholder="MM/DD/YYYY"
+                  value={this.state.date}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Input
+                  type="text"
+                  onChange={(e) => this.setState({time: e.target.value})}
+                  placeholder="Time"
+                  value={this.state.time}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Input
+                  type="text"
+                  onChange={(e) => this.setState({artist: e.target.value})}
+                  placeholder="Artist"
+                  value={this.state.artist}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Input
+                  type="text"
+                  onChange={(e) => this.setState({location: e.target.value})}
+                  placeholder="Location"
+                  value={this.state.location}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Input
+                  onChange={(e) => this.setState({link: e.target.value})}
+                  placeholder="Link for Tickets"
+                  value={this.state.link}
+                />
+              </FormGroup>
+              <FormControlLabel
+              control={<Checkbox checked={this.state.hasAttended} onChange={() =>{this.setState({hasAttended: !this.state.hasAttended})}} name="Attended" />}
+              label="Attended?"
+              />
+              <Button onClick={() => this.onSubmit()} variant="outlined">
+                Save
+              </Button>
+            </form>
+          </AccordionDetails>
+        </Accordion>
+      </div>
     );
   }
 }
 
 export default EventCreate;
-
