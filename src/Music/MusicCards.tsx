@@ -7,15 +7,17 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import clsx from 'clsx';
 
+
 export interface MusicCardsProps {
     token : string;
     trackList : TrackList;
     index : number;
 }
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      maxWidth: 275,
+      maxWidth: 375,
     },
     media: {
       height: 0,
@@ -39,21 +41,25 @@ const useStyles = makeStyles((theme: Theme) =>
   }
   }),
 );
+ 
 const MusicCards: React.SFC<MusicCardsProps> = (props: MusicCardsProps) => {
     const classes = useStyles();
     const {trackList, index} = props
     const [starRating, setstarRating] = React.useState<number | null >(2.5);
     const [expanded, setExpanded] = React.useState(false);
     const [textField, setTextField] = React.useState('');
+
     const handleSubmit = () => {
         fetch(`http://localhost:3001/music/create`, {
         method: 'POST',
         body: JSON.stringify({
+            music: {
             song: props.trackList.track.track_name,
             artist: props.trackList.track.artist_name,
             album: props.trackList.track.album_name,
             text: textField,
             rating: starRating,
+            }
         }),
         headers: new Headers({
             'Content-Type': 'application/json',
@@ -63,6 +69,7 @@ const MusicCards: React.SFC<MusicCardsProps> = (props: MusicCardsProps) => {
     .then((res) => res.json())
     .then((music) => {
         console.log(music);
+        handleExpandClick();
     //     this.setState({
     //         song: this.state.song,
     //         artist: this.state.artist,
@@ -73,11 +80,14 @@ const MusicCards: React.SFC<MusicCardsProps> = (props: MusicCardsProps) => {
     //     this.props.fetchMusic(); 
     // });
     })}
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
     return ( 
-        <Grid item xs={12} sm={12} className={classes.cardspacing} key={index}>
+      
+         <Grid item xs={4} sm={4} className={classes.cardspacing} key={props.index}>
         <Card className={classes.root} style={{backgroundColor: 'darksalmon'}}>
           <CardContent>
             <Typography variant="body2" color='textPrimary' component="p">
@@ -112,7 +122,7 @@ const MusicCards: React.SFC<MusicCardsProps> = (props: MusicCardsProps) => {
             <CardContent>
               <Typography>Ratings/Review:</Typography>
               <form className={classes.root} >
-              <Rating  name={`${Math.random()*10}`} value={starRating} onChange={(e, newValue) => setstarRating(newValue)} precision={0.5} />
+              <Rating  name={`${Math.random()*10}`} value={starRating} onChange={(e, newValue) => setstarRating(newValue)} />
               </form>
               <form className={classes.root} noValidate autoComplete="off">
               <TextField id="outlined-basic" label="Write a Review" variant="outlined" value={textField} onChange={(e) => setTextField(e.target.value) } />
@@ -122,6 +132,9 @@ const MusicCards: React.SFC<MusicCardsProps> = (props: MusicCardsProps) => {
           </Collapse>
         </Card>
         </Grid>
+        
+       
      );
 }
+ 
 export default MusicCards;
