@@ -1,5 +1,6 @@
 import React from 'react';
 import { UserEvents } from "./AdminInterface";
+import APIURL from '../helpers/environment';
 
 export interface AdminHomeProps {
     token: string;
@@ -26,7 +27,7 @@ class AdminHome extends React.Component<AdminHomeProps, AdminHomeState> {
 
 getInfo = () => {
 
-  fetch(`http://localhost:3001/admin/eventinfo`, {
+  fetch(`${APIURL}/admin/eventinfo`, {
     method: "GET",
     headers: new Headers({
       "Content-Type": "application/json",
@@ -81,29 +82,3 @@ render() {
       password: string;
   }
 
-
-
-
-
-
-    //       const endpointURL = `http://localhost:3001/admin/eventinfo`;
-//       const body: RequestBodyLogin = {
-//         admin: {
-//           email: this.state.email,
-//           password: this.state.password,
-//         },
-//       };
-//       let eventInfoHeaders = new Headers();
-//       eventInfoHeaders.append("Content-Type", "application/json");
-  
-//       const requestOptions = {
-//         method: "GET",
-//         headers: eventInfoHeaders,
-//         body: JSON.stringify(body),
-//       };
-//       fetch(endpointURL, requestOptions)
-//         .then((res: any) => res.json())
-//         .then((json: ResponseLogin) => {
-//           this.props.setToken(json.sessionToken);
-//           console.log(json);
-//         });

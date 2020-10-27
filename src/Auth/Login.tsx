@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import APIURL from '../helpers/environment';
 
 export interface LoginProps {
   setToken: any;
@@ -43,7 +44,7 @@ class Login extends React.Component<LoginProps, LoginState> {
     }
     
 
-    const endpointURL = `http://localhost:3001/users/login`;
+    const endpointURL = `${APIURL}/users/login`;
     const body: RequestBodyLogin = {
       users: {
         email: this.state.email,

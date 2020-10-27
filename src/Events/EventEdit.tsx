@@ -10,6 +10,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import userEvent from "@testing-library/user-event";
 import Typography from "@material-ui/core/Typography";
 import { Checkbox, FormControlLabel } from "@material-ui/core";
+import APIURL from '../helpers/environment';
 
 
 export interface EventEditProps {
@@ -43,7 +44,7 @@ class EventEdit extends React.Component<EventEditProps, EventEditState> {
     }
 
     onSubmit(){
-        fetch(`http://localhost:3001/events/update/${this.props.updateEvent.id}`, {
+        fetch(`${APIURL}/events/update/${this.props.updateEvent.id}`, {
         method: "PUT",
         body: JSON.stringify ({
             date: this.state.date,

@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import {UserEvents} from "./EventInterface";
 import { Accordion, AccordionDetails, AccordionSummary, Grid } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import APIURL from '../helpers/environment';
 
 
 export interface EventDisplayProps {
@@ -46,7 +47,7 @@ export default function EventDisplay(props: EventDisplayProps) {
   const classes = useStyles();
 
   const deleteEvent = (event: UserEvents) =>{
-    fetch(`http://localhost:3001/events/delete/${event.id}`,{
+    fetch(`${APIURL}/events/delete/${event.id}`,{
     method: "DELETE",
     headers: new Headers({
         "Content-Type": "application/json",

@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import APIURL from '../helpers/environment';
 
 export interface SignupProps {
   setToken: any;
@@ -27,7 +28,7 @@ class AdminSignup extends React.Component<SignupProps, SignupState> {
   }
 
   onSubmit() {
-    const endpointURL = `http://localhost:3001/admin/signup`;
+    const endpointURL = `${APIURL}/admin/signup`;
     const body: RequestBodySignup = {
       admin: {
         email: this.state.email,

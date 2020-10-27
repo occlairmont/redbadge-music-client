@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import APIURL from '../helpers/environment';
 
 export interface AdminProps {
   setToken: any;
@@ -38,7 +39,7 @@ class AdminLogin extends React.Component<AdminProps, AdminState> {
         return 
       }
 
-    const endpointURL = `http://localhost:3001/admin/login`;
+    const endpointURL = `${APIURL}/admin/login`;
     const body: RequestBodyLogin = {
       admin: {
         email: this.state.email,

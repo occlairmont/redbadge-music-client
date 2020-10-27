@@ -16,16 +16,7 @@ class EventDelete extends React.Component<EventDeleteProps> {
         this.state = {  };
     }
 
-    // deleteEvents(){
-    //     fetch(`http://localhost:3001/events/delete/event.id`,{
-    //         method: "DELETE",
-    //         headers: new Headers({
-    //             "Content-Type": "application/json",
-    //             "Authorization" : this.props.token !== null ? this.props.token : "",
-    //         }),
-    //     })
-    //     .then(()=> this.props.fetchEvents())
-    // };
+  
 
     render() { 
         return ( 

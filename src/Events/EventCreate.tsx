@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Checkbox, FormControlLabel, FormGroup, Input, Accordion, AccordionSummary, AccordionDetails, Typography } from "@material-ui/core/";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
+import APIURL from '../helpers/environment';
 
 export interface EventCreateProps {
   token: string | null;
@@ -31,7 +32,7 @@ class EventCreate extends React.Component<EventCreateProps, EventCreateState> {
 
   onSubmit() {
     const token = !this.props.token ? localStorage.getItem("token") : this.props.token
-    fetch("http://localhost:3001/events/create", {
+    fetch("${APIURL}/events/create", {
       method: "POST",
       body: JSON.stringify({
         date: this.state.date,

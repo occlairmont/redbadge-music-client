@@ -6,6 +6,7 @@ import { UserEvents } from "./EventInterface";
 import EventEdit from "./EventEdit";
 import {withStyles} from "@material-ui/styles"
 import EventDateSearch from "./EventDateSearch";
+import APIURL from '../helpers/environment';
 
 const useStyles = (theme: Theme) => ({
   button: {
@@ -41,7 +42,7 @@ class EventMain extends React.Component<EventMainProps, EventMainState> {
 
   fetchEvents = () => {
       const token = !this.props.token ? localStorage.getItem("token") : this.props.token
-    fetch("http://localhost:3001/events/all", {
+    fetch("${APIURL}/events/all", {
       headers: new Headers({
         "Content-Type": "application/json",
         Authorization: token !== null ? token : "",

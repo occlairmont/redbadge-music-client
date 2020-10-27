@@ -11,6 +11,7 @@ import { Button, TextField } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
+import APIURL from '../helpers/environment';
 
 export interface MusicTableProps {
     token : string;
@@ -59,7 +60,7 @@ const MusicTable: React.SFC<MusicTableProps> = (props: MusicTableProps) => {
 
 
     const handleSubmit = () => {
-        fetch(`http://localhost:3001/music`, {
+        fetch(`{APIURL}/music`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type' : 'application/json',
@@ -73,7 +74,7 @@ const MusicTable: React.SFC<MusicTableProps> = (props: MusicTableProps) => {
         })
     }
     function fetchAll(){
-      fetch(`http://localhost:3001/music/`, {
+      fetch(`${APIURL}/music/`, {
          method: 'GET', 
          headers: new Headers({
            'Content-Type' : 'application/json',
@@ -94,7 +95,7 @@ const MusicTable: React.SFC<MusicTableProps> = (props: MusicTableProps) => {
 
 
     function Edit(row: any){
-      fetch(`http://localhost:3001/music/${row.id}`, {
+      fetch(`${APIURL}/music/${row.id}`, {
         method: 'PUT',
         body: JSON.stringify({
             music: {
@@ -120,7 +121,7 @@ const MusicTable: React.SFC<MusicTableProps> = (props: MusicTableProps) => {
 
 
     function Delete(id: number){
-      fetch(`http://localhost:3001/music/${id}`, {
+      fetch(`{APIURL}/music/${id}`, {
          method: 'DELETE', 
          headers: new Headers({
            'Content-Type' : 'application/json',

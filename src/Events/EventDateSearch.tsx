@@ -3,6 +3,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import { Button, Grid, Typography } from '@material-ui/core';
 import { KeyboardDatePicker,MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { UserEvents } from './EventInterface';
+import APIURL from '../helpers/environment';
 
 export interface EventDateSearchProps {
     token: string | null;
@@ -33,7 +34,7 @@ class EventDateSearch extends React.Component<EventDateSearchProps, EventDateSea
     onSubmit = () =>{
         const start = typeof this.state.startDate == "string" && this.formatDate(this.state.startDate)
         const end = typeof this.state.endDate == "string" && this.formatDate(this.state.endDate)
-        fetch("http://localhost:3001/events/search-dates", {
+        fetch("${APIURL}/events/search-dates", {
             method: "POST",
             body: JSON.stringify({
                 startDate: start,

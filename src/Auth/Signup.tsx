@@ -12,6 +12,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 // import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import APIURL from '../helpers/environment';
 
 export interface SignupProps {
   setToken: any;
@@ -43,7 +44,7 @@ class Signup extends React.Component<SignupProps, SignupState> {
       return 
     }
 
-    const endpointURL = `http://localhost:3001/users/register`;
+    const endpointURL = `${APIURL}/users/register`;
     const body: RequestBodySignup = {
       users: {
         email: this.state.email,
