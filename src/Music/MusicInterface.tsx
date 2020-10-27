@@ -1,3 +1,10 @@
+   
+   export interface MusicData {
+      artist : string;
+      text : string;
+      rating : number;  
+    }
+
     export interface Header {
         status_code: number;
         execute_time: number;
