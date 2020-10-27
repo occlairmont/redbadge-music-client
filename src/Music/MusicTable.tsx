@@ -47,7 +47,7 @@ const useStyles = makeStyles({
   });
 
 
-  const headers=['Artist', 'Review Notes', 'Star Rating', 'Edit/Delete']
+  const headers=['Artist', 'Song', 'Review Notes', 'Star Rating', 'Edit/Delete']
 
  
 const MusicTable: React.SFC<MusicTableProps> = (props: MusicTableProps) => {
@@ -158,6 +158,10 @@ const MusicTable: React.SFC<MusicTableProps> = (props: MusicTableProps) => {
             <TableRow key={index}>
               <TableCell component="th" scope="row" style={{color: 'white', fontFamily: 'monospace', fontSize: '25px'}}>
                 {row.artist}
+              </TableCell>
+
+              <TableCell component="th" scope="row" style={{color: 'white', fontFamily: 'monospace', fontSize: '25px'}}>
+                {row.song}
               </TableCell>
 
               <TableCell component='th' scope='row' style={{color: 'white', fontFamily: 'cursive', fontSize: '25px'}}>{editModeActive && rowId === row.id ? <TextField id="outlined-basic" label="Write a Review" variant="outlined"  value={dataText} onChange={(e) => setDataText(e.target.value) } /> : row.text}</TableCell>
