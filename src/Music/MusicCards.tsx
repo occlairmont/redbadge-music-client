@@ -122,7 +122,7 @@ const MusicCards: React.SFC<MusicCardsProps> = (props: MusicCardsProps) => {
             <CardContent>
               <Typography>Ratings/Review:</Typography>
               <form className={classes.root} >
-              <Rating  name={`${Math.random()*10}`} value={starRating} onChange={(e, newValue) => setstarRating(newValue)} />
+              <Rating  name={`${Math.random()*10}`} value={starRating} precision={1.0} onChange={(e, newValue) => setstarRating(newValue)} />
               </form>
               <form className={classes.root} noValidate autoComplete="off">
               <TextField id="outlined-basic" label="Write a Review" variant="outlined" value={textField} onChange={(e) => setTextField(e.target.value) } />

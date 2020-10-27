@@ -172,7 +172,6 @@ const MusicTable: React.SFC<MusicTableProps> = (props: MusicTableProps) => {
               <Button variant='contained' color='secondary' startIcon={<DeleteIcon />} onClick={() => Delete(row.id)}>Delete</Button>
 
           </div> }
-
               </TableCell>
 
             </TableRow>
