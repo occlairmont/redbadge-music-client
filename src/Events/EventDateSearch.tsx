@@ -37,7 +37,7 @@ class EventDateSearch extends React.Component<EventDateSearchProps, EventDateSea
     onSubmit = () =>{
         const start = typeof this.state.startDate == "string" && this.formatDate(this.state.startDate)
         const end = typeof this.state.endDate == "string" && this.formatDate(this.state.endDate)
-        fetch("${APIURL}/events/search-dates", {
+        fetch(`${APIURL}/events/search-dates`, {
             method: "POST",
             body: JSON.stringify({
                 startDate: start,

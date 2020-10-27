@@ -39,7 +39,7 @@ class EventMain extends React.Component<EventMainProps, EventMainState> {
 
   fetchEvents = () => {
       const token = !this.props.token ? localStorage.getItem("token") : this.props.token
-    fetch("${APIURL}/events/all", {
+    fetch(`${APIURL}/events/all`, {
       headers: new Headers({
         "Content-Type": "application/json",
         Authorization: token !== null ? token : "",

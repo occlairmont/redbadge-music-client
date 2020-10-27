@@ -45,7 +45,7 @@ export default function EventDisplay(props: EventDisplayProps) {
   const classes = useStyles();
 
   const deleteEvent = (event: UserEvents) =>{
-    fetch(`{APIURL}/events/delete/${event.id}`,{
+    fetch(`${APIURL}/events/delete/${event.id}`,{
     method: "DELETE",
     headers: new Headers({
         "Content-Type": "application/json",

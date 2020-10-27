@@ -32,7 +32,7 @@ class EventCreate extends React.Component<EventCreateProps, EventCreateState> {
 
   onSubmit() {
     const token = !this.props.token ? localStorage.getItem("token") : this.props.token
-    fetch("$(APIURL}/events/create", {
+    fetch(`${APIURL}/events/create`, {
       method: "POST",
       body: JSON.stringify({
         date: this.state.date,
