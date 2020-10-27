@@ -9,6 +9,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import userEvent from "@testing-library/user-event";
 import Typography from "@material-ui/core/Typography";
+import { Checkbox, FormControlLabel } from "@material-ui/core";
 
 
 export interface EventEditProps {
@@ -25,7 +26,7 @@ export interface EventEditState {
     location: string | undefined;
     time: string | undefined;
     link: string | undefined;
-
+    hasAttended: boolean | undefined;
 }
  
 class EventEdit extends React.Component<EventEditProps, EventEditState> {
@@ -37,6 +38,7 @@ class EventEdit extends React.Component<EventEditProps, EventEditState> {
             location: this.props.updateEvent.location,
             time: this.props.updateEvent.time,
             link: this.props.updateEvent.link,
+            hasAttended: this.props.updateEvent.hasAttended,
         };
     }
 
@@ -49,6 +51,7 @@ class EventEdit extends React.Component<EventEditProps, EventEditState> {
             location: this.state.location,
             time: this.state.time,
             link: this.state.link,
+            hasAttended: this.state.hasAttended
         }),
         headers: new Headers({
             "Content-Type": "application/json",
@@ -130,6 +133,10 @@ class EventEdit extends React.Component<EventEditProps, EventEditState> {
              value={this.state.link}
              fullWidth
            />
+            <FormControlLabel
+            control={<Checkbox checked={this.state.hasAttended} onChange={() =>{this.setState({hasAttended: !this.state.hasAttended})}} name="Attended" />}
+            label="Attended?"
+            />
          </DialogContent>
          <DialogActions>
            <Button onClick={this.handleClose} color="primary">

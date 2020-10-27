@@ -1,9 +1,21 @@
 import React from "react";
 import EventCreate from "./EventCreate";
 import EventDisplay from "./EventDisplay";
-import { Grid, Paper } from "@material-ui/core";
+import { Grid, Paper, Theme } from "@material-ui/core";
 import { UserEvents } from "./EventInterface";
 import EventEdit from "./EventEdit";
+import {withStyles} from "@material-ui/styles"
+import EventDateSearch from "./EventDateSearch";
+
+const useStyles = (theme: Theme) => ({
+  button: {
+    width: "100%",
+    justifyContent: "flex-end",
+    paddingTop: 0,
+    paddingRight: 0,
+    paddingLeft: 0,
+  },
+})
 
 export interface EventMainProps {
   token: string | null;
@@ -13,6 +25,7 @@ export interface EventMainState {
   eventData: UserEvents[] | undefined;
   eventUpdate: UserEvents;
   updateActive: boolean;
+  filterActive: boolean;
 }
 
 class EventMain extends React.Component<EventMainProps, EventMainState> {
@@ -22,6 +35,7 @@ class EventMain extends React.Component<EventMainProps, EventMainState> {
       eventData: [], 
       eventUpdate: {},
       updateActive: false, 
+      filterActive: true,
     };
   }
 
@@ -42,6 +56,10 @@ class EventMain extends React.Component<EventMainProps, EventMainState> {
       });
   }
 
+  updateEventView = (events: UserEvents[]) => {
+    this.setState({eventData: events})
+  }
+
   updateEvent = (event: UserEvents) => {
     this.setState({eventUpdate: event})
   }
@@ -54,6 +72,14 @@ class EventMain extends React.Component<EventMainProps, EventMainState> {
     this.setState({updateActive: false})
   }
 
+  changeFilter = () => {
+    this.setState({filterActive: !this.state.filterActive})
+  }
+
+  // updateOff = () => {
+  // this.setState({filterActive: false})
+  // }
+
 
   componentDidMount() {
     this.fetchEvents();
@@ -62,15 +88,16 @@ class EventMain extends React.Component<EventMainProps, EventMainState> {
   render() {
     return (
       <div>
-        <Grid>
-          <Grid container >
-            <Grid xs={12} sm={5}>
+        <Grid >
+          <Grid container item spacing={3}>
+            <Grid item xs={12} sm={4}>
               <Paper >
                 <EventCreate token={this.props.token} fetchEvents={this.fetchEvents} />
+                <EventDateSearch token={this.props.token} eventData={this.updateEventView}/>
               </Paper>
             </Grid>
-            <Grid xs={12} sm={7}>
-                {this.state.eventData !== undefined ? (<EventDisplay token={this.props.token} fetchEvents={this.fetchEvents} updateEvent={this.updateEvent} updateOn={this.updateOn} userEvent={this.state.eventData} key={2} />) : (<></>)}  
+            <Grid item xs={12} sm={8}>
+                {this.state.eventData !== undefined ? (<EventDisplay token={this.props.token} fetchEvents={this.fetchEvents} updateEvent={this.updateEvent} updateOn={this.updateOn} userEvent={this.state.filterActive ? this.state.eventData.filter(row => row.hasAttended == true) : this.state.eventData} key={2} />) : (<></>)}  
                 {this.state.updateActive ? <EventEdit token={this.props.token} updateEvent={this.state.eventUpdate} fetchEvent={this.fetchEvents} updateOff={this.updateOff} updateActive={this.state.updateActive}/> : <></>} 
             </Grid>
           </Grid>
@@ -80,4 +107,4 @@ class EventMain extends React.Component<EventMainProps, EventMainState> {
   }
 }
 
-export default EventMain;
+export default withStyles(useStyles)(EventMain);

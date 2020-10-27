@@ -6,7 +6,9 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import {UserEvents} from "./EventInterface";
-import { Grid } from "@material-ui/core";
+import { Accordion, AccordionDetails, AccordionSummary, Grid } from "@material-ui/core";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+
 
 export interface EventDisplayProps {
   userEvent: UserEvents[];
@@ -21,10 +23,12 @@ const useStyles = makeStyles({
   root: {
     minWidth: 275,
   },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)",
+  button: {
+    width: "100%",
+    justifyContent: "flex-end",
+    paddingTop: 0,
+    paddingRight: 0,
+    paddingLeft: 0,
   },
   title: {
     fontSize: 14,
@@ -49,7 +53,7 @@ export default function EventDisplay(props: EventDisplayProps) {
       }),
     })
     .then(()=> props.fetchEvents())
-  };
+  }; 
 
   function formatDate(dateTime: any) {
     let date = new Date(dateTime)
@@ -63,27 +67,35 @@ export default function EventDisplay(props: EventDisplayProps) {
           <Grid item xs={6} sm={6} className={classes.cardspacing} key={index}>
             <Card className={classes.root}>
               <CardContent> 
-                <Typography
-                  className={classes.title}
-                  color="textSecondary"
-                  gutterBottom>
-                </Typography>
-                <Typography variant="h5" component="h2">
+                <Typography variant="h4" component="h2" gutterBottom>
                   {userEvent.artist}                  
                 </Typography>
-                <Typography variant="body2" component="p">
-                  {formatDate(userEvent.date)}
+                <hr/>
+                <Typography
+                  variant="body1" component="p">
+                   Where: {userEvent.location}
                 </Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                  {userEvent.time}
+                <Typography variant="body1" component="p">
+                  Date: {formatDate(userEvent.date)}
+                </Typography>
+                <Typography variant="body1" component="p">
+                  Time: {userEvent.time}
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small">Buy Tickets</Button>
+                <Button size="small" href={userEvent.link}>Buy Tickets</Button>
               </CardActions>
-              <hr/>
-                <Button onClick={()=>{props.updateEvent(userEvent); props.updateOn()}}>Update</Button>
-                <Button onClick={()=>{deleteEvent(userEvent)}}>Delete</Button>
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header">
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Button className={classes.button} onClick={()=>{props.updateEvent(userEvent); props.updateOn()}}>Update</Button>
+                  <Button className={classes.button} onClick={()=>{deleteEvent(userEvent)}}>Delete</Button>
+                </AccordionDetails>
+                </Accordion>
             </Card>
           </Grid>
         ))}
