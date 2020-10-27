@@ -6,7 +6,7 @@ import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 // import FavoriteIcon from '@material-ui/icons/Favorite';
 import clsx from 'clsx';
-
+import APIURL from '../helpers/environment';
 
 export interface MusicCardsProps {
     token : string;
@@ -50,7 +50,7 @@ const MusicCards: React.SFC<MusicCardsProps> = (props: MusicCardsProps) => {
     const [textField, setTextField] = React.useState('');
 
     const handleSubmit = () => {
-        fetch(`http://localhost:3001/music/create`, {
+        fetch(`${APIURL}/music/create`, {
         method: 'POST',
         body: JSON.stringify({
             music: {
