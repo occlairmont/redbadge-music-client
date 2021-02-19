@@ -25,7 +25,7 @@ export interface MusicData {
 
 
 const useStyles = makeStyles({
-  
+
     table: {
       // minWidth: 350,
       maxWidth: 1200,
@@ -46,7 +46,7 @@ const useStyles = makeStyles({
   });
 
 
-  const headers=['Artist', 'Review Notes', 'Star Rating', 'edit/delete']
+  const headers=['Artist', 'Song', 'Review Notes', 'Star Rating', 'edit/delete']
 
  
 const MusicTable: React.SFC<MusicTableProps> = (props: MusicTableProps) => {
@@ -155,8 +155,13 @@ const MusicTable: React.SFC<MusicTableProps> = (props: MusicTableProps) => {
         <TableBody>
           {data != undefined && data.sort((a, b) => a.id - b.id ).map((row: any , index: any) => (
             <TableRow key={index}>
+              
               <TableCell component="th" scope="row" style={{color: 'white', fontFamily: 'monospace', fontSize: '25px'}}>
                 {row.artist}
+              </TableCell>
+
+              <TableCell component="th" scope="row" style={{color: 'white', fontFamily: 'monospace', fontSize: '25px'}}>
+                {row.song}
               </TableCell>
 
               <TableCell component='th' scope='row' style={{color: 'white', fontFamily: 'cursive', fontSize: '25px'}}>{editModeActive && rowId === row.id ? <TextField id="outlined-basic" label="Write a Review" variant="outlined"  value={dataText} onChange={(e) => setDataText(e.target.value) } /> : row.text}</TableCell>

@@ -24,7 +24,7 @@ class MusicMain extends React.Component<MusicMainProps, MusicMainState> {
 
     onSearch = (e:any) => {
         e.preventDefault();
-        fetch(`https://cors-anywhere.herokuapp.com/api.musixmatch.com/ws/1.1/track.search?q_artist=${this.state.artist}&page_size=25&page=1&s_track_rating=desc&apikey=157843679a41620c9286f788772f29e0`)
+        fetch(`https://cors-anywhere.herokuapp.com/api.musixmatch.com/ws/1.1/track.search?q_artist=${this.state.artist}&page_size=25&page=1&s_track_rating=desc&apikey=b4e045669f1de0e2ba866086653af11f`)
         // fetch(`https://yacdn.org/serve/https://api.musixmatch.com/ws/1.1/track.search?q_artist=${this.state.artist}&page_size=25&page=1&s_track_rating=desc&apikey=157843679a41620c9286f788772f29e0`)
         .then((res) => res.json())
         .then((json:TrackResponse) => {
